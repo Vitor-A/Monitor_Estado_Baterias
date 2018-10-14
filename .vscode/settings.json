@@ -1,0 +1,32 @@
+{
+   "window.zoomLevel": 0,
+   "workbench.startupEditor": "newUntitledFile",
+   "editor.tabSize": 2,
+   "files.encoding": "iso88591",
+   "editor.insertSpaces": true,
+   "editor.detectIndentation": false,
+   "C_Cpp.errorSquiggles": "Disabled",
+   "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/__history": true
+   },
+   "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/*.lst": true,
+      "**/*.esym": true,
+      "**/*.sym": true,
+      "**/*.tre": true,
+      "**/*.STA": true
+   },
+   "files.associations": {
+      "fota2eeprom.h": "c",
+      "comands.h": "c",
+      "tai_bateria.h": "c",
+      "serial.h": "c"
+   }
+}
