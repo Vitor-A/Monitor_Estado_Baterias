@@ -1,0 +1,228 @@
+000     @SCRATCH
+000     @MEMSET.P1
+001     @SCRATCH
+001     _RETURN_
+001-002 @MEMSET.P1
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     rs232_errors
+017-018 strtok.save
+019-01C _Randseed
+01D-04E numeros
+04F     qtd_numeros
+050-051 posicao_numero
+052-0E7 comando_recibido_UART
+0E8-17D comando_recibido_BUFF
+17E-17F posicao_valor_comando
+180-181 timeout_trama_UART
+182.0   comando_disponivel_UART
+182.1   resposta_SIM
+182.2   One_Second
+182.3   One_Minute
+183-186 timeout
+187-188 @sprintf_string
+189-18A Miliseconds
+18B-18C seconds
+18D     comando
+18E-1A7 MAIN.@STRPARAM
+1A8-1B8 Executar_Cada_Segundo.@STRPARAM
+1A8     MAIN.@SCRATCH1
+1A9     MAIN.@SCRATCH2
+1AA     MAIN.@SCRATCH3
+1AB     MAIN.@SCRATCH4
+1AC     MAIN.@SCRATCH5
+1AD     MAIN.@SCRATCH6
+1B9     Executa_Comando.comando
+1B9     @delay_ms1.P1
+1B9-1C7 Get_Comando.CMD
+1B9     Executar_Cada_Segundo.@SCRATCH1
+1BA-1C8 Executa_Comando.CMD
+1BA     Executar_Cada_Segundo.@SCRATCH2
+1BB     Executar_Cada_Segundo.@SCRATCH3
+1BC     Executar_Cada_Segundo.@SCRATCH4
+1BD     Executar_Cada_Segundo.@SCRATCH5
+1BE     Executar_Cada_Segundo.@SCRATCH6
+1C8     Get_Comando.@SCRATCH1
+1C9-1D7 Executa_Comando.numero
+1C9     Get_Comando.@SCRATCH2
+1D8-1E3 Executa_Comando.@STRPARAM
+1E4-1F0 Executa_Comando.@STRPARAM
+1F1-1F2 insere_numero.numero
+1F1-208 Read_SMS.@STRPARAM
+1F1     get_numero.nro_caracteres
+1F1     Executa_Comando.@SCRATCH1
+1F2     get_numero.posicao
+1F2     Executa_Comando.@SCRATCH2
+1F3     insere_numero.index
+1F3-1F4 Send_SMS.numero
+1F3-1F4 get_numero.destino
+1F3     Executa_Comando.@SCRATCH3
+1F4     insere_numero.index_2
+1F4     Executa_Comando.@SCRATCH4
+1F5-1F6 Send_SMS.mensagem
+1F5     get_numero.index
+1F5     insere_numero.@SCRATCH1
+1F6     insere_numero.@SCRATCH2
+1F6     get_numero.@SCRATCH1
+1F7-214 Send_SMS.numero_envio
+1F7     insere_numero.@SCRATCH3
+1F7     get_numero.@SCRATCH2
+1F8     get_numero.@SCRATCH3
+209     Read_SMS.@SCRATCH1
+20A     Read_SMS.@SCRATCH2
+20B     Read_SMS.@SCRATCH3
+20C     Read_SMS.@SCRATCH4
+20D     Read_SMS.@SCRATCH5
+20E     Read_SMS.@SCRATCH6
+215-22C Send_SMS.@STRPARAM
+22D     @PSTRINGCN_991.P1
+22D     Send_SMS.@SCRATCH1
+22D     @PSTRINGR_991.@SCRATCH1
+22E     Send_SMS.@SCRATCH2
+22E     @PSTRINGCN_991.@SCRATCH1
+22E     @PSTRINGR_991.@SCRATCH2
+22F     Send_SMS.@SCRATCH3
+22F     @PSTRINGCN_991.@SCRATCH2
+230     @SPRINTF.P1
+230     Send_SMS.@SCRATCH4
+231-232 envia_SIM800L.send
+231     Send_SMS.@SCRATCH5
+232     Send_SMS.@SCRATCH6
+233-234 envia_SIM800L.recive
+235     envia_SIM800L.tentativas
+236-23B envia_SIM800L.@STRPARAM
+23C     envia_SIM800L.@SCRATCH1
+23C     @PSTRINGR_115200_31766_31767.@SCRATCH1
+23D     envia_SIM800L.@SCRATCH2
+23D     @PSTRINGR_115200_31766_31767.@SCRATCH2
+23E-23F strstr.s1
+23E     envia_SIM800L.@SCRATCH3
+23F     envia_SIM800L.@SCRATCH4
+240-241 strstr.s2
+242-243 strstr.s
+244-245 strstr.t
+246     strstr.@SCRATCH1
+247     recepcao_UART.i
+248     recepcao_UART.caracterRx
+249     recepcao_UART.@SCRATCH1
+24A     recepcao_UART.@SCRATCH2
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @MEMSET.P4
+FE9-FEA @READ_PACKED_MEMORY.P5
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  Executar_Cada_Minuto
+0000A2  @const965.call
+0000C2  @const966.call
+0000E2  @const969.call
+000102  @const970.call
+000128  @const972.call
+00014A  @const973.call
+00016C  @const974.call
+000194  @const996.call
+0001BA  @const999.call
+0001EA  @const1002.call
+00020C  @const1006.call
+00023E  @const1017.call
+000266  @const1019.call
+00028E  @const1020.call
+0002B6  @GETCH_BIU_1
+0002CC  recepcao_UART
+000386  @const989.call
+000396  Timer_0
+0003D6  @delay_ms1
+000400  @SPRINTF
+000422  @PSTRINGCN_991
+00044A  @PSTRINGR_991
+000470  @PSTRINGR_115200_31766_31767
+000498  strstr
+000526  @PUTCHARI_BIU_1
+000530  envia_SIM800L
+000628  Send_SMS
+000764  Get_Comando
+000822  Read_SMS
+0008CE  get_numero
+000922  insere_numero
+0009E2  @MEMSET
+0009FE  limpa_numeros
+000A14  Executa_Comando
+000C1A  Executar_Cada_Segundo
+000CBE  MAIN
+000CBE  @cinit1
+000D18  @cinit2
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    C:\Users\Vitor\Desktop\TAI_BATERIA\
+
+Project Files:
+    TAI_Bateria.c                                           [13-out-18 22:29  CRC=7521100E]
+    ..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h  [12-nov-13 14:35  CRC=5337E248]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\stdlib.h   [08-jun-11 14:39  CRC=0B6669CF]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h   [16-jul-10 09:27  CRC=897CEC6C]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\string.h   [14-jul-11 10:13  CRC=23EDEC8F]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h    [03-jan-08 13:55  CRC=2D1F019F]
+    TAI_Bateria.h                                           [04-out-18 01:56  CRC=D872A938]
+    SIM800L.h                                               [12-out-18 19:10  CRC=D872A938]
+    SIM800L.c                                               [13-out-18 20:39  CRC=5D878968]
+    Serial.h                                                [13-out-18 22:47  CRC=B446CDDE]
+    Serial.c                                                [14-out-18 01:09  CRC=B3A92216]
+    numeros.h                                               [13-out-18 20:05  CRC=00000000]
+    numeros.c                                               [14-out-18 00:48  CRC=44CB0958]
+
+Source signature=AE3C153B
+
+Units:
+    TAI_Bateria (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   TAI_Bateria.xsym
+    Errors:      TAI_Bateria.err
+    Ext Symbols: TAI_Bateria.esym
+    INHX32:      TAI_Bateria.hex
+    Symbols:     TAI_Bateria.sym
+    List:        TAI_Bateria.lst
+    Debug/eCOD:  TAI_Bateria.cod
+    Project:     TAI_Bateria.ccspjt

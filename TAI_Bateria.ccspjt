@@ -1,0 +1,16 @@
+[PROJECT]
+Target=TAI_Bateria.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.015
+Compiler=PCH
+[Target Data]
+FileList=TAI_Bateria.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\devices\;C:\Program Files (x86)\PICC\drivers\
+[TAI_Bateria.c]
+Type=4
+[mru-list]
+1=TAI_Bateria.c
+[Units]
+Count=1
+1=TAI_Bateria (main)
