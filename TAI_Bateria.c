@@ -117,14 +117,14 @@ void Executar_Cada_Segundo(){
       envia_SIM800L("AT+CMGD=1,1\r\n", "OK");
     }
     comando = 0;
-    comando_disponivel_UART = FALSE;
-    enable_interrupts(GLOBAL);
-    enable_interrupts(INT_RDA);
-
+    clear_command();
   }
-
+  
+  return;
 }
 
 void Executar_Cada_Minuto(){
   //Send_SMS("031995822739","TESTE");
+
+  return;
 }

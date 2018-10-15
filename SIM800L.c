@@ -18,8 +18,8 @@ int1 envia_SIM800L(char *send, char *recive){
 
     fprintf(SIM800L_SERIAL,send);                                             // Envia comando para o SIM800L 
     if(strstr(recive,"+CMGS")!=0){
+      delay_ms(150);
       fputc(0x1A,SIM800L_SERIAL);
-      fprintf(SIM800L_SERIAL,"\r\n"); 
     }                                                                                        
     while(!comando_disponivel_UART && --timeout > 0);                         // Aguarda o SIM800L responder por ~23 segundos caso nao responda retorna 0
                          
@@ -45,7 +45,7 @@ int1 envia_SIM800L(char *send, char *recive){
 
 int1 Send_SMS(char *numero,char *mensagem){
   
-  char numero_envio[30];
+  char numero_envio[35];
 
   sprintf(numero_envio,"AT+CMGS=\"%s\"\r\n",numero);
 

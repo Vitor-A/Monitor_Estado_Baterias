@@ -32,7 +32,6 @@ void recepcao_UART()
            }
            timeout_trama_UART--;
         }
-        enable_interrupts(INT_RDA);
         comando_disponivel_UART = 1;
         timeout_trama_UART = 100000;
         comando_recibido_UART[i] = 0;
@@ -55,7 +54,7 @@ char Get_Comando()
 void Executa_Comando(char comando){
 
   char CMD[15];
-  char numero[15];
+  char numero[20];
 
   switch(comando){
      
@@ -140,5 +139,18 @@ void get_numero(int nro_caracteres, int posicao, char *destino){
 
   destino[index] = '\0';
 
+  return;
+}
+
+void clear_command(){
+
+  delay_ms(200);
+  memset (comando_recibido_UART, 0x00, sizeof(comando_recibido_UART));
+
+  comando_disponivel_UART = FALSE;
+  enable_interrupts(GLOBAL);
+  enable_interrupts(INT_RTCC);
+  enable_interrupts(INT_RDA);
+  
   return;
 }

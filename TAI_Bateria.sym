@@ -51,7 +51,6 @@
 1AC     MAIN.@SCRATCH5
 1AD     MAIN.@SCRATCH6
 1B9     Executa_Comando.comando
-1B9     @delay_ms1.P1
 1B9-1C7 Get_Comando.CMD
 1B9     Executar_Cada_Segundo.@SCRATCH1
 1BA-1C8 Executa_Comando.CMD
@@ -61,69 +60,70 @@
 1BD     Executar_Cada_Segundo.@SCRATCH5
 1BE     Executar_Cada_Segundo.@SCRATCH6
 1C8     Get_Comando.@SCRATCH1
-1C9-1D7 Executa_Comando.numero
+1C9-1DC Executa_Comando.numero
 1C9     Get_Comando.@SCRATCH2
-1D8-1E3 Executa_Comando.@STRPARAM
-1E4-1F0 Executa_Comando.@STRPARAM
-1F1-1F2 insere_numero.numero
-1F1-208 Read_SMS.@STRPARAM
-1F1     get_numero.nro_caracteres
-1F1     Executa_Comando.@SCRATCH1
-1F2     get_numero.posicao
-1F2     Executa_Comando.@SCRATCH2
-1F3     insere_numero.index
-1F3-1F4 Send_SMS.numero
-1F3-1F4 get_numero.destino
-1F3     Executa_Comando.@SCRATCH3
-1F4     insere_numero.index_2
-1F4     Executa_Comando.@SCRATCH4
-1F5-1F6 Send_SMS.mensagem
-1F5     get_numero.index
-1F5     insere_numero.@SCRATCH1
-1F6     insere_numero.@SCRATCH2
-1F6     get_numero.@SCRATCH1
-1F7-214 Send_SMS.numero_envio
-1F7     insere_numero.@SCRATCH3
-1F7     get_numero.@SCRATCH2
-1F8     get_numero.@SCRATCH3
-209     Read_SMS.@SCRATCH1
-20A     Read_SMS.@SCRATCH2
-20B     Read_SMS.@SCRATCH3
-20C     Read_SMS.@SCRATCH4
-20D     Read_SMS.@SCRATCH5
-20E     Read_SMS.@SCRATCH6
-215-22C Send_SMS.@STRPARAM
-22D     @PSTRINGCN_991.P1
-22D     Send_SMS.@SCRATCH1
-22D     @PSTRINGR_991.@SCRATCH1
-22E     Send_SMS.@SCRATCH2
-22E     @PSTRINGCN_991.@SCRATCH1
-22E     @PSTRINGR_991.@SCRATCH2
-22F     Send_SMS.@SCRATCH3
-22F     @PSTRINGCN_991.@SCRATCH2
-230     @SPRINTF.P1
-230     Send_SMS.@SCRATCH4
-231-232 envia_SIM800L.send
-231     Send_SMS.@SCRATCH5
-232     Send_SMS.@SCRATCH6
-233-234 envia_SIM800L.recive
-235     envia_SIM800L.tentativas
-236-23B envia_SIM800L.@STRPARAM
-23C     envia_SIM800L.@SCRATCH1
-23C     @PSTRINGR_115200_31766_31767.@SCRATCH1
-23D     envia_SIM800L.@SCRATCH2
-23D     @PSTRINGR_115200_31766_31767.@SCRATCH2
-23E-23F strstr.s1
-23E     envia_SIM800L.@SCRATCH3
-23F     envia_SIM800L.@SCRATCH4
-240-241 strstr.s2
-242-243 strstr.s
-244-245 strstr.t
-246     strstr.@SCRATCH1
-247     recepcao_UART.i
-248     recepcao_UART.caracterRx
-249     recepcao_UART.@SCRATCH1
-24A     recepcao_UART.@SCRATCH2
+1DD-1E8 Executa_Comando.@STRPARAM
+1E9-1F5 Executa_Comando.@STRPARAM
+1F6-1F7 insere_numero.numero
+1F6     get_numero.nro_caracteres
+1F6-20D Read_SMS.@STRPARAM
+1F6     Executa_Comando.@SCRATCH1
+1F7     get_numero.posicao
+1F7     Executa_Comando.@SCRATCH2
+1F8-1F9 get_numero.destino
+1F8-1F9 Send_SMS.numero
+1F8     insere_numero.index
+1F8     Executa_Comando.@SCRATCH3
+1F9     insere_numero.index_2
+1F9     Executa_Comando.@SCRATCH4
+1FA     get_numero.index
+1FA-1FB Send_SMS.mensagem
+1FA     insere_numero.@SCRATCH1
+1FB     insere_numero.@SCRATCH2
+1FB     get_numero.@SCRATCH1
+1FC-21E Send_SMS.numero_envio
+1FC     insere_numero.@SCRATCH3
+1FC     get_numero.@SCRATCH2
+1FD     get_numero.@SCRATCH3
+20E     Read_SMS.@SCRATCH1
+20F     Read_SMS.@SCRATCH2
+210     Read_SMS.@SCRATCH3
+211     Read_SMS.@SCRATCH4
+212     Read_SMS.@SCRATCH5
+213     Read_SMS.@SCRATCH6
+21F-236 Send_SMS.@STRPARAM
+237     @PSTRINGCN_991.P1
+237     Send_SMS.@SCRATCH1
+237     @PSTRINGR_991.@SCRATCH1
+238     Send_SMS.@SCRATCH2
+238     @PSTRINGCN_991.@SCRATCH1
+238     @PSTRINGR_991.@SCRATCH2
+239     Send_SMS.@SCRATCH3
+239     @PSTRINGCN_991.@SCRATCH2
+23A     @SPRINTF.P1
+23A     Send_SMS.@SCRATCH4
+23B-23C envia_SIM800L.send
+23B     Send_SMS.@SCRATCH5
+23C     Send_SMS.@SCRATCH6
+23D-23E envia_SIM800L.recive
+23F     envia_SIM800L.tentativas
+240-245 envia_SIM800L.@STRPARAM
+246     @delay_ms1.P1
+246     envia_SIM800L.@SCRATCH1
+246     @PSTRINGR_115200_31766_31767.@SCRATCH1
+247     envia_SIM800L.@SCRATCH2
+247     @PSTRINGR_115200_31766_31767.@SCRATCH2
+248-249 strstr.s1
+248     envia_SIM800L.@SCRATCH3
+249     envia_SIM800L.@SCRATCH4
+24A-24B strstr.s2
+24C-24D strstr.s
+24E-24F strstr.t
+250     strstr.@SCRATCH1
+251     recepcao_UART.i
+252     recepcao_UART.caracterRx
+253     recepcao_UART.@SCRATCH1
+254     recepcao_UART.@SCRATCH2
 F83     PSP_DATA
 FB4.6   C1OUT
 FB4.7   C2OUT
@@ -133,25 +133,25 @@ FBC     CCP_2_HIGH
 FBE     CCP_1_LOW
 FBE     CCP_1
 FBF     CCP_1_HIGH
-FE1-FE2 @READ_PACKED_MEMORY.P1
-FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
 FE9-FEA @READ_PROGRAM_MEMORY.P1
-FE9-FEA @WRITE_PACKED_MEMORY.P2
-FE9-FEA @WRITE_PROGRAM_MEMORY.P3
-FE9-FEA @MEMSET.P4
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @MEMSET.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
 FE9-FEA @READ_PACKED_MEMORY.P5
-FF6-FF8 @READ_PROGRAM_MEMORY.P1
-FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
 
 ROM Allocation:
 000004  Executar_Cada_Minuto
-0000A2  @const965.call
-0000C2  @const966.call
-0000E2  @const969.call
-000102  @const970.call
-000128  @const972.call
-00014A  @const973.call
-00016C  @const974.call
+0000A2  @const966.call
+0000C2  @const967.call
+0000E2  @const970.call
+000102  @const971.call
+000128  @const973.call
+00014A  @const974.call
+00016C  @const975.call
 000194  @const996.call
 0001BA  @const999.call
 0001EA  @const1002.call
@@ -161,50 +161,51 @@ ROM Allocation:
 00028E  @const1020.call
 0002B6  @GETCH_BIU_1
 0002CC  recepcao_UART
-000386  @const989.call
-000396  Timer_0
-0003D6  @delay_ms1
-000400  @SPRINTF
-000422  @PSTRINGCN_991
-00044A  @PSTRINGR_991
-000470  @PSTRINGR_115200_31766_31767
-000498  strstr
-000526  @PUTCHARI_BIU_1
-000530  envia_SIM800L
-000628  Send_SMS
-000764  Get_Comando
-000822  Read_SMS
-0008CE  get_numero
-000922  insere_numero
-0009E2  @MEMSET
-0009FE  limpa_numeros
-000A14  Executa_Comando
-000C1A  Executar_Cada_Segundo
-000CBE  MAIN
-000CBE  @cinit1
-000D18  @cinit2
+000384  @const989.call
+000394  Timer_0
+0003D4  @delay_ms1
+0003FE  @SPRINTF
+000420  @PSTRINGCN_991
+000448  @PSTRINGR_991
+00046E  @PSTRINGR_115200_31766_31767
+000496  strstr
+000524  @PUTCHARI_BIU_1
+00052E  envia_SIM800L
+00061C  Send_SMS
+00075A  Get_Comando
+000818  Read_SMS
+0008BE  get_numero
+000912  insere_numero
+0009D2  @MEMSET
+0009EC  limpa_numeros
+000A02  Executa_Comando
+000C08  clear_command
+000C36  Executar_Cada_Segundo
+000CD8  @cinit1
+000CD8  MAIN
+000D32  @cinit2
 0136  StrtoulGO
 0136  StrtolGO
 
 Project Directory:
-    C:\Users\Vitor\Desktop\TAI_BATERIA\
+    C:\Users\Vitor\Desktop\Monitor_Estado_Baterias\
 
 Project Files:
-    TAI_Bateria.c                                           [13-out-18 22:29  CRC=7521100E]
+    TAI_Bateria.c                                           [15-out-18 16:45  CRC=7521100E]
     ..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h  [12-nov-13 14:35  CRC=5337E248]
     ..\..\..\..\Program Files (x86)\PICC\drivers\stdlib.h   [08-jun-11 14:39  CRC=0B6669CF]
     ..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h   [16-jul-10 09:27  CRC=897CEC6C]
     ..\..\..\..\Program Files (x86)\PICC\drivers\string.h   [14-jul-11 10:13  CRC=23EDEC8F]
     ..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h    [03-jan-08 13:55  CRC=2D1F019F]
-    TAI_Bateria.h                                           [04-out-18 01:56  CRC=D872A938]
-    SIM800L.h                                               [12-out-18 19:10  CRC=D872A938]
-    SIM800L.c                                               [13-out-18 20:39  CRC=5D878968]
-    Serial.h                                                [13-out-18 22:47  CRC=B446CDDE]
-    Serial.c                                                [14-out-18 01:09  CRC=B3A92216]
-    numeros.h                                               [13-out-18 20:05  CRC=00000000]
-    numeros.c                                               [14-out-18 00:48  CRC=44CB0958]
+    TAI_Bateria.h                                           [14-out-18 16:16  CRC=D872A938]
+    SIM800L.h                                               [14-out-18 16:16  CRC=D872A938]
+    SIM800L.c                                               [15-out-18 17:11  CRC=5393CEAF]
+    Serial.h                                                [15-out-18 16:37  CRC=B446CDDE]
+    Serial.c                                                [15-out-18 16:44  CRC=0E939F32]
+    numeros.h                                               [14-out-18 16:16  CRC=00000000]
+    numeros.c                                               [14-out-18 16:16  CRC=44CB0958]
 
-Source signature=AE3C153B
+Source signature=FF32D79E
 
 Units:
     TAI_Bateria (main)
