@@ -171,19 +171,19 @@ ROM Allocation:
 000496  strstr
 000524  @PUTCHARI_BIU_1
 00052E  envia_SIM800L
-00061C  Send_SMS
-00075A  Get_Comando
-000818  Read_SMS
-0008BE  get_numero
-000912  insere_numero
-0009D2  @MEMSET
-0009EC  limpa_numeros
-000A02  Executa_Comando
-000C08  clear_command
-000C36  Executar_Cada_Segundo
-000CD8  @cinit1
-000CD8  MAIN
-000D32  @cinit2
+00061E  Send_SMS
+00075C  Get_Comando
+00081A  Read_SMS
+0008C0  get_numero
+000914  insere_numero
+0009D4  @MEMSET
+0009EE  limpa_numeros
+000A04  Executa_Comando
+000C12  clear_command
+000C50  Executar_Cada_Segundo
+000CFA  @cinit1
+000CFA  MAIN
+000D54  @cinit2
 0136  StrtoulGO
 0136  StrtolGO
 
@@ -191,21 +191,21 @@ Project Directory:
     C:\Users\Vitor\Desktop\Monitor_Estado_Baterias\
 
 Project Files:
-    TAI_Bateria.c                                           [15-out-18 16:45  CRC=7521100E]
-    ..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h  [12-nov-13 14:35  CRC=5337E248]
-    ..\..\..\..\Program Files (x86)\PICC\drivers\stdlib.h   [08-jun-11 14:39  CRC=0B6669CF]
-    ..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h   [16-jul-10 09:27  CRC=897CEC6C]
-    ..\..\..\..\Program Files (x86)\PICC\drivers\string.h   [14-jul-11 10:13  CRC=23EDEC8F]
-    ..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h    [03-jan-08 13:55  CRC=2D1F019F]
-    TAI_Bateria.h                                           [14-out-18 16:16  CRC=D872A938]
-    SIM800L.h                                               [14-out-18 16:16  CRC=D872A938]
-    SIM800L.c                                               [15-out-18 17:11  CRC=5393CEAF]
-    Serial.h                                                [15-out-18 16:37  CRC=B446CDDE]
-    Serial.c                                                [15-out-18 16:44  CRC=0E939F32]
-    numeros.h                                               [14-out-18 16:16  CRC=00000000]
-    numeros.c                                               [14-out-18 16:16  CRC=44CB0958]
+    TAI_Bateria.c                                           [21-out-18 11:32  CRC=97EE9A87]
+    ..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h  [12-nov-13 15:35  CRC=5337E248]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\stdlib.h   [08-jun-11 15:39  CRC=0B6669CF]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h   [16-jul-10 10:27  CRC=897CEC6C]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\string.h   [14-jul-11 11:13  CRC=23EDEC8F]
+    ..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h    [03-jan-08 14:55  CRC=2D1F019F]
+    TAI_Bateria.h                                           [14-out-18 17:16  CRC=D872A938]
+    SIM800L.h                                               [14-out-18 17:16  CRC=D872A938]
+    SIM800L.c                                               [21-out-18 12:03  CRC=C444B77B]
+    Serial.h                                                [15-out-18 17:37  CRC=B446CDDE]
+    Serial.c                                                [21-out-18 12:05  CRC=C607811A]
+    numeros.h                                               [14-out-18 17:16  CRC=00000000]
+    numeros.c                                               [14-out-18 17:16  CRC=44CB0958]
 
-Source signature=FF32D79E
+Source signature=4A252CCB
 
 Units:
     TAI_Bateria (main)

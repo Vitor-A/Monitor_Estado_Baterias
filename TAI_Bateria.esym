@@ -1,7 +1,7 @@
 D G "__PCH__" 0 0 ""5.015""
 D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""15-out-18""
-D G "__TIME__" 0 0 ""17:11:36"" "Projeto Monitor do Estado de Baterias - TAI"
+D G "__DATE__" 0 0 ""21-out-18""
+D G "__TIME__" 0 0 ""11:33:08"" "Projeto Monitor do Estado de Baterias - TAI"
 C G "" 0 5 6 "*"
 c L "set_tris_a" 1 1 6 "FUNCTION"
 v L "value" 1 45 "int8" `54 
@@ -1372,24 +1372,24 @@ V L "comando" 10 54 "int8" `969
 F G "Executa_Comando" 10 54 "void(int8 comando)" `933 
 V L "CMD" 10 56 "int8[15]" `968 
 V L "numero" 10 57 "int8[20]" `969 
-C L "Executa_Comando" 10 61 1 "FUNCTION"
-C L "Executa_Comando" 10 61 1 "FUNCTION"
-C L "Executa_Comando" 10 61 1 "FUNCTION"
-C L "Executa_Comando" 10 61 1 "FUNCTION"
-V L "pointer_to_string" 10 103 "*int8" `937 
-V L "nro_caracteres" 10 103 "int8" `938 
-V L "posicao" 10 103 "int8" `939  "get_value(posicao_valor_comando,3,6);"
-F G "get_value" 10 104 "int32(*int8 pointer_to_string,int8 nro_caracteres,int8 posicao)" `936 
-V L "valor" 10 105 "int32" `977 
-V L "i" 10 106 "int8" `978 
-V L "aux" 10 107 "int32" `979 
-V L "potencia" 10 108 "int8" `980 
-V L "nro_caracteres" 10 130 "int8" `941 
-V L "posicao" 10 130 "int8" `942 
-V L "destino" 10 130 "*int8" `984 
-F G "get_numero" 10 130 "void(int8 nro_caracteres,int8 posicao,*int8 destino)" `940 
-V L "index" 10 132 "int8" `981 
-F G "clear_command" 10 145 "void()" `944 
+C L "Executa_Comando" 10 62 1 "FUNCTION"
+C L "Executa_Comando" 10 62 1 "FUNCTION"
+C L "Executa_Comando" 10 62 1 "FUNCTION"
+C L "Executa_Comando" 10 62 1 "FUNCTION"
+V L "pointer_to_string" 10 104 "*int8" `937 
+V L "nro_caracteres" 10 104 "int8" `938 
+V L "posicao" 10 104 "int8" `939  "get_value(posicao_valor_comando,3,6);"
+F G "get_value" 10 105 "int32(*int8 pointer_to_string,int8 nro_caracteres,int8 posicao)" `936 
+V L "valor" 10 106 "int32" `977 
+V L "i" 10 107 "int8" `978 
+V L "aux" 10 108 "int32" `979 
+V L "potencia" 10 109 "int8" `980 
+V L "nro_caracteres" 10 131 "int8" `941 
+V L "posicao" 10 131 "int8" `942 
+V L "destino" 10 131 "*int8" `984 
+F G "get_numero" 10 131 "void(int8 nro_caracteres,int8 posicao,*int8 destino)" `940 
+V L "index" 10 133 "int8" `981 
+F G "clear_command" 10 146 "void()" `944 
 V G "resposta_SIM" 8 3 "int1" `982 
 V G "timeout" 8 5 "int32" `983 
 V L "send" 8 7 "*int8" `927 
@@ -1420,7 +1420,7 @@ C L "MAIN" 0 28 1 "FUNCTION"
 C L "MAIN" 0 28 1 "FUNCTION"
 C L "MAIN" 0 28 1 "FUNCTION"
 F G "Executar_Cada_Segundo" 0 100 "void()" `924 
-F G "Executar_Cada_Minuto" 0 126 "void()" `925  "Send_SMS("031995822739","TESTE");"
+F G "Executar_Cada_Minuto" 0 127 "void()" `925  "Send_SMS("031995822739","TESTE");"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

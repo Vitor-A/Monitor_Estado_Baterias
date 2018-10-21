@@ -19,7 +19,7 @@ void recepcao_UART()
       caracterRx = getc(SIM800L_SERIAL);
       if(caracterRx == '>'||caracterRx == '+' ||caracterRx =='\n'||caracterRx =='\r') {
         comando_recibido_UART[0] = caracterRx;
-        while(i < (UART_BUFFER_SIZE-1) && timeout_trama_UART > 0) {
+        while(i < (UART_BUFFER_SIZE-2) && timeout_trama_UART > 0) {
            if(kbhit(SIM800L_SERIAL)) {
              caracterRx = getc(SIM800L_SERIAL);
              comando_recibido_UART[i] = caracterRx;
@@ -55,7 +55,8 @@ void Executa_Comando(char comando){
 
   char CMD[15];
   char numero[20];
-
+  disable_interrupts(GLOBAL);
+  
   switch(comando){
      
     case SMS_COMMAND:       //+CMTI: "SM",10<CR><LF>
@@ -146,6 +147,7 @@ void clear_command(){
 
   delay_ms(200);
   memset (comando_recibido_UART, 0x00, sizeof(comando_recibido_UART));
+  memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF));
 
   comando_disponivel_UART = FALSE;
   enable_interrupts(GLOBAL);

@@ -110,6 +110,7 @@ void Executar_Cada_Segundo(){
       
     }
     if(resposta_SIM == 1){
+      disable_interrupts(GLOBAL);
       resposta_SIM = 0;
       comando = Get_Comando();
       Executa_Comando(comando);

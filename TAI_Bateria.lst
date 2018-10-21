@@ -1,16 +1,16 @@
-CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
+CCS PCH C Compiler, Version 5.015, 5967               21-out-18 11:33
 
                Filename:   C:\Users\Vitor\Desktop\Monitor_Estado_Baterias\TAI_Bateria.lst
 
-               ROM used:   3618 bytes (11%)
-                           Largest free fragment is 29150
+               ROM used:   3654 bytes (11%)
+                           Largest free fragment is 29114
                RAM used:   404 (20%) at main() level
                            597 (29%) worst case
                Stack used: 7 locations (5 in main + 2 for interrupts)
                Stack size: 31
 
 *
-0000:  GOTO   0CD8
+0000:  GOTO   0CFA
 *
 0008:  MOVWF  04
 000A:  MOVFF  FD8,05
@@ -384,7 +384,7 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 0464:  BTFSC  FD8.2
 0466:  INCF   FEA,F
 0468:  BRA    0448
-046A:  GOTO   0642 (RETURN)
+046A:  GOTO   0644 (RETURN)
 046E:  MOVF   FEF,F
 0470:  BZ    0492
 0472:  MOVFF  FEA,247
@@ -401,18 +401,18 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 0490:  BRA    046E
 0492:  GOTO   055A (RETURN)
 *
-09D2:  TSTFSZ 01
-09D4:  BRA    09DC
-09D6:  TSTFSZ 02
-09D8:  BRA    09DE
-09DA:  BRA    09EA
-09DC:  INCF   02,F
-09DE:  MOVFF  00,FEE
-09E2:  DECFSZ 01,F
-09E4:  BRA    09DE
-09E6:  DECFSZ 02,F
-09E8:  BRA    09DE
-09EA:  RETURN 0
+09D4:  TSTFSZ 01
+09D6:  BRA    09DE
+09D8:  TSTFSZ 02
+09DA:  BRA    09E0
+09DC:  BRA    09EC
+09DE:  INCF   02,F
+09E0:  MOVFF  00,FEE
+09E4:  DECFSZ 01,F
+09E6:  BRA    09E0
+09E8:  DECFSZ 02,F
+09EA:  BRA    09E0
+09EC:  RETURN 0
 ....................  
 .................... #list 
 ....................  
@@ -2482,119 +2482,119 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................  
 .................... int1 insere_numero(char *numero){ // >+5531995822739>+5531995822739>+5531995822739 
 *
-0912:  MOVF   4F,W
-0914:  MULLW  0F
-0916:  MOVFF  FF3,1F8
-091A:  MOVLB  1
-091C:  CLRF   xF9
+0914:  MOVF   4F,W
+0916:  MULLW  0F
+0918:  MOVFF  FF3,1F8
+091C:  MOVLB  1
+091E:  CLRF   xF9
 ....................   
 ....................   int8 index = qtd_numeros*15; 
 ....................   int8 index_2 = 0; 
 ....................  
 ....................   if(qtd_numeros == 3){ 
-091E:  MOVF   4F,W
-0920:  SUBLW  03
-0922:  BNZ   092A
+0920:  MOVF   4F,W
+0922:  SUBLW  03
+0924:  BNZ   092C
 ....................  
 ....................     return 0; 
-0924:  MOVLW  00
-0926:  MOVWF  01
-0928:  BRA    09CC
+0926:  MOVLW  00
+0928:  MOVWF  01
+092A:  BRA    09CE
 ....................  
 ....................   } 
 ....................  
 ....................   posicao_numero = strstr(numeros,numero); 
-092A:  MOVLB  2
-092C:  CLRF   x49
-092E:  MOVLW  1D
-0930:  MOVWF  x48
-0932:  MOVFF  1F7,24B
-0936:  MOVFF  1F6,24A
-093A:  MOVLB  0
-093C:  RCALL  0496
-093E:  MOVFF  02,51
-0942:  MOVFF  01,50
+092C:  MOVLB  2
+092E:  CLRF   x49
+0930:  MOVLW  1D
+0932:  MOVWF  x48
+0934:  MOVFF  1F7,24B
+0938:  MOVFF  1F6,24A
+093C:  MOVLB  0
+093E:  RCALL  0496
+0940:  MOVFF  02,51
+0944:  MOVFF  01,50
 ....................    
 ....................   if(posicao_numero == 0){ 
-0946:  MOVF   50,F
-0948:  BNZ   09C6
-094A:  MOVF   51,F
-094C:  BNZ   09C6
+0948:  MOVF   50,F
+094A:  BNZ   09C8
+094C:  MOVF   51,F
+094E:  BNZ   09C8
 ....................  
 ....................     numeros[index] ='>'; 
-094E:  CLRF   03
-0950:  MOVLB  1
-0952:  MOVF   xF8,W
-0954:  ADDLW  1D
-0956:  MOVWF  FE9
-0958:  MOVLW  00
-095A:  ADDWFC 03,W
-095C:  MOVWF  FEA
-095E:  MOVLW  3E
-0960:  MOVWF  FEF
+0950:  CLRF   03
+0952:  MOVLB  1
+0954:  MOVF   xF8,W
+0956:  ADDLW  1D
+0958:  MOVWF  FE9
+095A:  MOVLW  00
+095C:  ADDWFC 03,W
+095E:  MOVWF  FEA
+0960:  MOVLW  3E
+0962:  MOVWF  FEF
 ....................      
 ....................     for(index = index+1;numero[index_2]!='\0';index++){ 
-0962:  MOVLW  01
-0964:  ADDWF  xF8,F
-0966:  CLRF   03
-0968:  MOVF   xF9,W
-096A:  ADDWF  xF6,W
-096C:  MOVWF  FE9
-096E:  MOVF   xF7,W
-0970:  ADDWFC 03,W
-0972:  MOVWF  FEA
-0974:  MOVF   FEF,F
-0976:  BZ    09AC
+0964:  MOVLW  01
+0966:  ADDWF  xF8,F
+0968:  CLRF   03
+096A:  MOVF   xF9,W
+096C:  ADDWF  xF6,W
+096E:  MOVWF  FE9
+0970:  MOVF   xF7,W
+0972:  ADDWFC 03,W
+0974:  MOVWF  FEA
+0976:  MOVF   FEF,F
+0978:  BZ    09AE
 ....................       
 ....................       numeros[index] = numero[index_2]; 
-0978:  CLRF   03
-097A:  MOVF   xF8,W
-097C:  ADDLW  1D
-097E:  MOVWF  01
-0980:  MOVLW  00
-0982:  ADDWFC 03,F
-0984:  MOVFF  03,1FB
-0988:  CLRF   03
-098A:  MOVF   xF9,W
-098C:  ADDWF  xF6,W
-098E:  MOVWF  FE9
-0990:  MOVF   xF7,W
-0992:  ADDWFC 03,W
-0994:  MOVWF  FEA
-0996:  MOVFF  FEF,1FC
-099A:  MOVFF  1FB,FEA
-099E:  MOVFF  01,FE9
-09A2:  MOVFF  1FC,FEF
+097A:  CLRF   03
+097C:  MOVF   xF8,W
+097E:  ADDLW  1D
+0980:  MOVWF  01
+0982:  MOVLW  00
+0984:  ADDWFC 03,F
+0986:  MOVFF  03,1FB
+098A:  CLRF   03
+098C:  MOVF   xF9,W
+098E:  ADDWF  xF6,W
+0990:  MOVWF  FE9
+0992:  MOVF   xF7,W
+0994:  ADDWFC 03,W
+0996:  MOVWF  FEA
+0998:  MOVFF  FEF,1FC
+099C:  MOVFF  1FB,FEA
+09A0:  MOVFF  01,FE9
+09A4:  MOVFF  1FC,FEF
 ....................       index_2++; 
-09A6:  INCF   xF9,F
-09A8:  INCF   xF8,F
-09AA:  BRA    0966
+09A8:  INCF   xF9,F
+09AA:  INCF   xF8,F
+09AC:  BRA    0968
 ....................         
 ....................     } 
 ....................     numeros[index]='\0'; 
-09AC:  CLRF   03
-09AE:  MOVF   xF8,W
-09B0:  ADDLW  1D
-09B2:  MOVWF  FE9
-09B4:  MOVLW  00
-09B6:  ADDWFC 03,W
-09B8:  MOVWF  FEA
-09BA:  CLRF   FEF
+09AE:  CLRF   03
+09B0:  MOVF   xF8,W
+09B2:  ADDLW  1D
+09B4:  MOVWF  FE9
+09B6:  MOVLW  00
+09B8:  ADDWFC 03,W
+09BA:  MOVWF  FEA
+09BC:  CLRF   FEF
 ....................     qtd_numeros++; 
-09BC:  INCF   4F,F
+09BE:  INCF   4F,F
 ....................     return 1; 
-09BE:  MOVLW  01
-09C0:  MOVWF  01
-09C2:  BRA    09CC
-09C4:  MOVLB  0
+09C0:  MOVLW  01
+09C2:  MOVWF  01
+09C4:  BRA    09CE
+09C6:  MOVLB  0
 ....................    
 ....................   } 
 ....................   return 0; 
-09C6:  MOVLW  00
-09C8:  MOVWF  01
-09CA:  MOVLB  1
-09CC:  MOVLB  0
-09CE:  GOTO   0B2A (RETURN)
+09C8:  MOVLW  00
+09CA:  MOVWF  01
+09CC:  MOVLB  1
+09CE:  MOVLB  0
+09D0:  GOTO   0B34 (RETURN)
 .................... } 
 ....................  
 ....................  
@@ -2602,17 +2602,17 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................  
 ....................   qtd_numeros = 0; 
 *
-09EC:  CLRF   4F
+09EE:  CLRF   4F
 ....................   memset (numeros, 0x00, sizeof(numeros)); 
-09EE:  CLRF   FEA
-09F0:  MOVLW  1D
-09F2:  MOVWF  FE9
-09F4:  CLRF   00
-09F6:  CLRF   02
-09F8:  MOVLW  32
-09FA:  MOVWF  01
-09FC:  RCALL  09D2
-09FE:  GOTO   0BAA (RETURN)
+09F0:  CLRF   FEA
+09F2:  MOVLW  1D
+09F4:  MOVWF  FE9
+09F6:  CLRF   00
+09F8:  CLRF   02
+09FA:  MOVLW  32
+09FC:  MOVWF  01
+09FE:  RCALL  09D4
+0A00:  GOTO   0BB4 (RETURN)
 ....................    
 .................... } 
 ....................  
@@ -2664,9 +2664,9 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 0300:  BNZ   037C
 ....................         comando_recibido_UART[0] = caracterRx; 
 0302:  MOVFF  252,52
-....................         while(i < (UART_BUFFER_SIZE-1) && timeout_trama_UART > 0) { 
+....................         while(i < (UART_BUFFER_SIZE-2) && timeout_trama_UART > 0) { 
 0306:  MOVF   x51,W
-0308:  SUBLW  94
+0308:  SUBLW  93
 030A:  BNC   035E
 030C:  MOVLB  1
 030E:  MOVF   x80,F
@@ -2750,98 +2750,98 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................   char CMD[15]; 
 ....................   strcpy (comando_recibido_BUFF, comando_recibido_UART);                            
 *
-075A:  CLRF   FEA
-075C:  MOVLW  E8
-075E:  MOVWF  FE9
-0760:  CLRF   FE2
-0762:  MOVLW  52
-0764:  MOVWF  FE1
-0766:  MOVF   FE7,F
-0768:  MOVFF  FE6,FEE
-076C:  BNZ   0766
+075C:  CLRF   FEA
+075E:  MOVLW  E8
+0760:  MOVWF  FE9
+0762:  CLRF   FE2
+0764:  MOVLW  52
+0766:  MOVWF  FE1
+0768:  MOVF   FE7,F
+076A:  MOVFF  FE6,FEE
+076E:  BNZ   0768
 ....................   strcpy (CMD, "+CMTI"); posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); if(posicao_valor_comando!= 0)return(SMS_COMMAND); 
-076E:  MOVLW  01
-0770:  MOVWF  FEA
-0772:  MOVLW  B9
-0774:  MOVWF  FE9
-0776:  MOVFF  FF2,1C8
-077A:  BCF    FF2.7
-077C:  MOVLW  00
-077E:  RCALL  00A2
-0780:  TBLRD*-
-0782:  TBLRD*+
-0784:  MOVF   FF5,W
-0786:  MOVWF  FEE
-0788:  IORLW  00
-078A:  BNZ   0782
-078C:  MOVLB  1
-078E:  BTFSC  xC8.7
-0790:  BSF    FF2.7
-0792:  MOVLB  2
-0794:  CLRF   x49
-0796:  MOVLW  E8
-0798:  MOVWF  x48
-079A:  MOVLW  01
-079C:  MOVWF  x4B
-079E:  MOVLW  B9
-07A0:  MOVWF  x4A
-07A2:  MOVLB  0
-07A4:  RCALL  0496
-07A6:  MOVFF  02,17F
-07AA:  MOVFF  01,17E
-07AE:  MOVLB  1
-07B0:  MOVF   x7E,F
-07B2:  BNZ   07B8
-07B4:  MOVF   x7F,F
-07B6:  BZ    07BE
-07B8:  MOVLW  01
-07BA:  MOVWF  01
-07BC:  BRA    0814
+0770:  MOVLW  01
+0772:  MOVWF  FEA
+0774:  MOVLW  B9
+0776:  MOVWF  FE9
+0778:  MOVFF  FF2,1C8
+077C:  BCF    FF2.7
+077E:  MOVLW  00
+0780:  RCALL  00A2
+0782:  TBLRD*-
+0784:  TBLRD*+
+0786:  MOVF   FF5,W
+0788:  MOVWF  FEE
+078A:  IORLW  00
+078C:  BNZ   0784
+078E:  MOVLB  1
+0790:  BTFSC  xC8.7
+0792:  BSF    FF2.7
+0794:  MOVLB  2
+0796:  CLRF   x49
+0798:  MOVLW  E8
+079A:  MOVWF  x48
+079C:  MOVLW  01
+079E:  MOVWF  x4B
+07A0:  MOVLW  B9
+07A2:  MOVWF  x4A
+07A4:  MOVLB  0
+07A6:  RCALL  0496
+07A8:  MOVFF  02,17F
+07AC:  MOVFF  01,17E
+07B0:  MOVLB  1
+07B2:  MOVF   x7E,F
+07B4:  BNZ   07BA
+07B6:  MOVF   x7F,F
+07B8:  BZ    07C0
+07BA:  MOVLW  01
+07BC:  MOVWF  01
+07BE:  BRA    0816
 ....................   strcpy (CMD, "+CMGL"); posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); if(posicao_valor_comando!= 0)return(SMS_READ_COMMAND); 
-07BE:  MOVLW  01
-07C0:  MOVWF  FEA
-07C2:  MOVLW  B9
-07C4:  MOVWF  FE9
-07C6:  MOVFF  FF2,1C8
-07CA:  BCF    FF2.7
-07CC:  MOVLW  00
-07CE:  MOVLB  0
-07D0:  RCALL  00C2
-07D2:  TBLRD*-
-07D4:  TBLRD*+
-07D6:  MOVF   FF5,W
-07D8:  MOVWF  FEE
-07DA:  IORLW  00
-07DC:  BNZ   07D4
-07DE:  MOVLB  1
-07E0:  BTFSC  xC8.7
-07E2:  BSF    FF2.7
-07E4:  MOVLB  2
-07E6:  CLRF   x49
-07E8:  MOVLW  E8
-07EA:  MOVWF  x48
-07EC:  MOVLW  01
-07EE:  MOVWF  x4B
-07F0:  MOVLW  B9
-07F2:  MOVWF  x4A
-07F4:  MOVLB  0
-07F6:  RCALL  0496
-07F8:  MOVFF  02,17F
-07FC:  MOVFF  01,17E
-0800:  MOVLB  1
-0802:  MOVF   x7E,F
-0804:  BNZ   080A
-0806:  MOVF   x7F,F
-0808:  BZ    0810
-080A:  MOVLW  02
-080C:  MOVWF  01
-080E:  BRA    0814
+07C0:  MOVLW  01
+07C2:  MOVWF  FEA
+07C4:  MOVLW  B9
+07C6:  MOVWF  FE9
+07C8:  MOVFF  FF2,1C8
+07CC:  BCF    FF2.7
+07CE:  MOVLW  00
+07D0:  MOVLB  0
+07D2:  RCALL  00C2
+07D4:  TBLRD*-
+07D6:  TBLRD*+
+07D8:  MOVF   FF5,W
+07DA:  MOVWF  FEE
+07DC:  IORLW  00
+07DE:  BNZ   07D6
+07E0:  MOVLB  1
+07E2:  BTFSC  xC8.7
+07E4:  BSF    FF2.7
+07E6:  MOVLB  2
+07E8:  CLRF   x49
+07EA:  MOVLW  E8
+07EC:  MOVWF  x48
+07EE:  MOVLW  01
+07F0:  MOVWF  x4B
+07F2:  MOVLW  B9
+07F4:  MOVWF  x4A
+07F6:  MOVLB  0
+07F8:  RCALL  0496
+07FA:  MOVFF  02,17F
+07FE:  MOVFF  01,17E
+0802:  MOVLB  1
+0804:  MOVF   x7E,F
+0806:  BNZ   080C
+0808:  MOVF   x7F,F
+080A:  BZ    0812
+080C:  MOVLW  02
+080E:  MOVWF  01
+0810:  BRA    0816
 ....................  
 ....................   return(0); 
-0810:  MOVLW  00
-0812:  MOVWF  01
-0814:  MOVLB  0
-0816:  RETURN 0
+0812:  MOVLW  00
+0814:  MOVWF  01
+0816:  MOVLB  0
+0818:  RETURN 0
 .................... } 
 ....................  
 ....................  
@@ -2849,290 +2849,295 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................  
 ....................   char CMD[15]; 
 ....................   char numero[20]; 
-....................  
-....................   switch(comando){ 
+....................   disable_interrupts(GLOBAL); 
 *
-0A02:  MOVLB  1
-0A04:  MOVF   xB9,W
-0A06:  XORLW  01
-0A08:  MOVLB  0
-0A0A:  BZ    0A12
-0A0C:  XORLW  03
-0A0E:  BZ    0A16
-0A10:  BRA    0C06
+0A04:  BCF    FF2.6
+0A06:  BCF    FF2.7
+0A08:  BTFSC  FF2.7
+0A0A:  BRA    0A06
+....................    
+....................   switch(comando){ 
+0A0C:  MOVLB  1
+0A0E:  MOVF   xB9,W
+0A10:  XORLW  01
+0A12:  MOVLB  0
+0A14:  BZ    0A1C
+0A16:  XORLW  03
+0A18:  BZ    0A20
+0A1A:  BRA    0C10
 ....................       
 ....................     case SMS_COMMAND:       //+CMTI: "SM",10<CR><LF> 
 ....................       Read_SMS(); 
-0A12:  BRA    0818
+0A1C:  BRA    081A
 ....................     break; 
-0A14:  BRA    0C06
+0A1E:  BRA    0C10
 ....................  
 ....................     case SMS_READ_COMMAND:  //+CMGL: 1,"REC UNREAD","+5531995822739","","18/10/13,21:57:54-12"<CR><LF> 
 ....................  
 ....................       strcpy (CMD, "OITAI");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); 
-0A16:  MOVLW  01
-0A18:  MOVWF  FEA
-0A1A:  MOVLW  BA
-0A1C:  MOVWF  FE9
-0A1E:  MOVFF  FF2,1F6
-0A22:  BCF    FF2.7
-0A24:  MOVLW  00
-0A26:  CALL   00E2
-0A2A:  TBLRD*-
-0A2C:  TBLRD*+
-0A2E:  MOVF   FF5,W
-0A30:  MOVWF  FEE
-0A32:  IORLW  00
-0A34:  BNZ   0A2C
-0A36:  MOVLB  1
-0A38:  BTFSC  xF6.7
-0A3A:  BSF    FF2.7
-0A3C:  MOVLB  2
-0A3E:  CLRF   x49
-0A40:  MOVLW  E8
-0A42:  MOVWF  x48
-0A44:  MOVLW  01
-0A46:  MOVWF  x4B
-0A48:  MOVLW  BA
-0A4A:  MOVWF  x4A
-0A4C:  MOVLB  0
-0A4E:  RCALL  0496
-0A50:  MOVFF  02,17F
-0A54:  MOVFF  01,17E
+0A20:  MOVLW  01
+0A22:  MOVWF  FEA
+0A24:  MOVLW  BA
+0A26:  MOVWF  FE9
+0A28:  MOVFF  FF2,1F6
+0A2C:  BCF    FF2.7
+0A2E:  MOVLW  00
+0A30:  CALL   00E2
+0A34:  TBLRD*-
+0A36:  TBLRD*+
+0A38:  MOVF   FF5,W
+0A3A:  MOVWF  FEE
+0A3C:  IORLW  00
+0A3E:  BNZ   0A36
+0A40:  MOVLB  1
+0A42:  BTFSC  xF6.7
+0A44:  BSF    FF2.7
+0A46:  MOVLB  2
+0A48:  CLRF   x49
+0A4A:  MOVLW  E8
+0A4C:  MOVWF  x48
+0A4E:  MOVLW  01
+0A50:  MOVWF  x4B
+0A52:  MOVLW  BA
+0A54:  MOVWF  x4A
+0A56:  MOVLB  0
+0A58:  RCALL  0496
+0A5A:  MOVFF  02,17F
+0A5E:  MOVFF  01,17E
 ....................       if(posicao_valor_comando!= 0){ 
-0A58:  MOVLB  1
-0A5A:  MOVF   x7E,F
-0A5C:  BNZ   0A62
-0A5E:  MOVF   x7F,F
-0A60:  BZ    0ABA
+0A62:  MOVLB  1
+0A64:  MOVF   x7E,F
+0A66:  BNZ   0A6C
+0A68:  MOVF   x7F,F
+0A6A:  BZ    0AC4
 ....................  
 ....................         get_numero(14,25,numero); 
-0A62:  MOVLW  0E
-0A64:  MOVWF  xF6
-0A66:  MOVLW  19
-0A68:  MOVWF  xF7
-0A6A:  MOVLW  01
-0A6C:  MOVWF  xF9
-0A6E:  MOVLW  C9
-0A70:  MOVWF  xF8
-0A72:  MOVLB  0
-0A74:  RCALL  08BE
+0A6C:  MOVLW  0E
+0A6E:  MOVWF  xF6
+0A70:  MOVLW  19
+0A72:  MOVWF  xF7
+0A74:  MOVLW  01
+0A76:  MOVWF  xF9
+0A78:  MOVLW  C9
+0A7A:  MOVWF  xF8
+0A7C:  MOVLB  0
+0A7E:  RCALL  08C0
 ....................         Send_SMS(numero,"HEARTBEAT()"); 
-0A76:  MOVLW  01
-0A78:  MOVWF  FEA
-0A7A:  MOVLW  DD
-0A7C:  MOVWF  FE9
-0A7E:  MOVFF  FF2,1F6
-0A82:  BCF    FF2.7
-0A84:  MOVLW  0C
-0A86:  MOVWF  01
-0A88:  CLRF   FF7
-0A8A:  MOVLW  00
-0A8C:  CALL   0102
-0A90:  TBLRD*-
-0A92:  TBLRD*+
-0A94:  MOVFF  FF5,FEE
-0A98:  DECFSZ 01,F
-0A9A:  BRA    0A92
-0A9C:  MOVLB  1
-0A9E:  BTFSC  xF6.7
-0AA0:  BSF    FF2.7
-0AA2:  MOVLW  01
-0AA4:  MOVWF  xF9
-0AA6:  MOVLW  C9
-0AA8:  MOVWF  xF8
-0AAA:  MOVLW  01
-0AAC:  MOVWF  xFB
-0AAE:  MOVLW  DD
-0AB0:  MOVWF  xFA
-0AB2:  MOVLB  0
-0AB4:  RCALL  061C
+0A80:  MOVLW  01
+0A82:  MOVWF  FEA
+0A84:  MOVLW  DD
+0A86:  MOVWF  FE9
+0A88:  MOVFF  FF2,1F6
+0A8C:  BCF    FF2.7
+0A8E:  MOVLW  0C
+0A90:  MOVWF  01
+0A92:  CLRF   FF7
+0A94:  MOVLW  00
+0A96:  CALL   0102
+0A9A:  TBLRD*-
+0A9C:  TBLRD*+
+0A9E:  MOVFF  FF5,FEE
+0AA2:  DECFSZ 01,F
+0AA4:  BRA    0A9C
+0AA6:  MOVLB  1
+0AA8:  BTFSC  xF6.7
+0AAA:  BSF    FF2.7
+0AAC:  MOVLW  01
+0AAE:  MOVWF  xF9
+0AB0:  MOVLW  C9
+0AB2:  MOVWF  xF8
+0AB4:  MOVLW  01
+0AB6:  MOVWF  xFB
+0AB8:  MOVLW  DD
+0ABA:  MOVWF  xFA
+0ABC:  MOVLB  0
+0ABE:  RCALL  061E
 ....................         break; 
-0AB6:  BRA    0C06
-0AB8:  MOVLB  1
+0AC0:  BRA    0C10
+0AC2:  MOVLB  1
 ....................       } 
 ....................  
 ....................       strcpy (CMD, "+NUMADD");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); //+CMGL: 1,"REC UNREAD","+5531995822739","","18/10/14,00:28:46-12"nr+NUMADD+5531995422738<CR><LF> 
-0ABA:  MOVLW  01
-0ABC:  MOVWF  FEA
-0ABE:  MOVLW  BA
-0AC0:  MOVWF  FE9
-0AC2:  MOVFF  FF2,1F6
-0AC6:  BCF    FF2.7
-0AC8:  MOVLW  00
-0ACA:  MOVLB  0
-0ACC:  CALL   0128
-0AD0:  TBLRD*-
-0AD2:  TBLRD*+
-0AD4:  MOVF   FF5,W
-0AD6:  MOVWF  FEE
-0AD8:  IORLW  00
-0ADA:  BNZ   0AD2
-0ADC:  MOVLB  1
-0ADE:  BTFSC  xF6.7
-0AE0:  BSF    FF2.7
-0AE2:  MOVLB  2
-0AE4:  CLRF   x49
-0AE6:  MOVLW  E8
-0AE8:  MOVWF  x48
-0AEA:  MOVLW  01
-0AEC:  MOVWF  x4B
-0AEE:  MOVLW  BA
-0AF0:  MOVWF  x4A
-0AF2:  MOVLB  0
-0AF4:  RCALL  0496
-0AF6:  MOVFF  02,17F
-0AFA:  MOVFF  01,17E
+0AC4:  MOVLW  01
+0AC6:  MOVWF  FEA
+0AC8:  MOVLW  BA
+0ACA:  MOVWF  FE9
+0ACC:  MOVFF  FF2,1F6
+0AD0:  BCF    FF2.7
+0AD2:  MOVLW  00
+0AD4:  MOVLB  0
+0AD6:  CALL   0128
+0ADA:  TBLRD*-
+0ADC:  TBLRD*+
+0ADE:  MOVF   FF5,W
+0AE0:  MOVWF  FEE
+0AE2:  IORLW  00
+0AE4:  BNZ   0ADC
+0AE6:  MOVLB  1
+0AE8:  BTFSC  xF6.7
+0AEA:  BSF    FF2.7
+0AEC:  MOVLB  2
+0AEE:  CLRF   x49
+0AF0:  MOVLW  E8
+0AF2:  MOVWF  x48
+0AF4:  MOVLW  01
+0AF6:  MOVWF  x4B
+0AF8:  MOVLW  BA
+0AFA:  MOVWF  x4A
+0AFC:  MOVLB  0
+0AFE:  RCALL  0496
+0B00:  MOVFF  02,17F
+0B04:  MOVFF  01,17E
 ....................       if(posicao_valor_comando!= 0){ 
-0AFE:  MOVLB  1
-0B00:  MOVF   x7E,F
-0B02:  BNZ   0B08
-0B04:  MOVF   x7F,F
-0B06:  BZ    0B58
+0B08:  MOVLB  1
+0B0A:  MOVF   x7E,F
+0B0C:  BNZ   0B12
+0B0E:  MOVF   x7F,F
+0B10:  BZ    0B62
 ....................          
 ....................         get_numero(14,75,numero); 
-0B08:  MOVLW  0E
-0B0A:  MOVWF  xF6
-0B0C:  MOVLW  4B
-0B0E:  MOVWF  xF7
-0B10:  MOVLW  01
-0B12:  MOVWF  xF9
-0B14:  MOVLW  C9
-0B16:  MOVWF  xF8
-0B18:  MOVLB  0
-0B1A:  RCALL  08BE
+0B12:  MOVLW  0E
+0B14:  MOVWF  xF6
+0B16:  MOVLW  4B
+0B18:  MOVWF  xF7
+0B1A:  MOVLW  01
+0B1C:  MOVWF  xF9
+0B1E:  MOVLW  C9
+0B20:  MOVWF  xF8
+0B22:  MOVLB  0
+0B24:  RCALL  08C0
 ....................         insere_numero(numero); 
-0B1C:  MOVLW  01
-0B1E:  MOVLB  1
-0B20:  MOVWF  xF7
-0B22:  MOVLW  C9
-0B24:  MOVWF  xF6
-0B26:  MOVLB  0
-0B28:  BRA    0912
-....................         get_numero(14,25,numero); 
-0B2A:  MOVLW  0E
-0B2C:  MOVLB  1
+0B26:  MOVLW  01
+0B28:  MOVLB  1
+0B2A:  MOVWF  xF7
+0B2C:  MOVLW  C9
 0B2E:  MOVWF  xF6
-0B30:  MOVLW  19
-0B32:  MOVWF  xF7
-0B34:  MOVLW  01
-0B36:  MOVWF  xF9
-0B38:  MOVLW  C9
-0B3A:  MOVWF  xF8
-0B3C:  MOVLB  0
-0B3E:  RCALL  08BE
+0B30:  MOVLB  0
+0B32:  BRA    0914
+....................         get_numero(14,25,numero); 
+0B34:  MOVLW  0E
+0B36:  MOVLB  1
+0B38:  MOVWF  xF6
+0B3A:  MOVLW  19
+0B3C:  MOVWF  xF7
+0B3E:  MOVLW  01
+0B40:  MOVWF  xF9
+0B42:  MOVLW  C9
+0B44:  MOVWF  xF8
+0B46:  MOVLB  0
+0B48:  RCALL  08C0
 ....................         Send_SMS(numero,numeros); 
-0B40:  MOVLW  01
-0B42:  MOVLB  1
-0B44:  MOVWF  xF9
-0B46:  MOVLW  C9
-0B48:  MOVWF  xF8
-0B4A:  CLRF   xFB
-0B4C:  MOVLW  1D
-0B4E:  MOVWF  xFA
-0B50:  MOVLB  0
-0B52:  RCALL  061C
+0B4A:  MOVLW  01
+0B4C:  MOVLB  1
+0B4E:  MOVWF  xF9
+0B50:  MOVLW  C9
+0B52:  MOVWF  xF8
+0B54:  CLRF   xFB
+0B56:  MOVLW  1D
+0B58:  MOVWF  xFA
+0B5A:  MOVLB  0
+0B5C:  RCALL  061E
 ....................         break; 
-0B54:  BRA    0C06
-0B56:  MOVLB  1
+0B5E:  BRA    0C10
+0B60:  MOVLB  1
 ....................       } 
 ....................  
 ....................       strcpy (CMD, "+NUMDEL");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); //+NUMDEL 
-0B58:  MOVLW  01
-0B5A:  MOVWF  FEA
-0B5C:  MOVLW  BA
-0B5E:  MOVWF  FE9
-0B60:  MOVFF  FF2,1F6
-0B64:  BCF    FF2.7
-0B66:  MOVLW  00
-0B68:  MOVLB  0
-0B6A:  CALL   014A
-0B6E:  TBLRD*-
-0B70:  TBLRD*+
-0B72:  MOVF   FF5,W
-0B74:  MOVWF  FEE
-0B76:  IORLW  00
-0B78:  BNZ   0B70
-0B7A:  MOVLB  1
-0B7C:  BTFSC  xF6.7
-0B7E:  BSF    FF2.7
-0B80:  MOVLB  2
-0B82:  CLRF   x49
-0B84:  MOVLW  E8
-0B86:  MOVWF  x48
-0B88:  MOVLW  01
-0B8A:  MOVWF  x4B
-0B8C:  MOVLW  BA
-0B8E:  MOVWF  x4A
-0B90:  MOVLB  0
-0B92:  RCALL  0496
-0B94:  MOVFF  02,17F
-0B98:  MOVFF  01,17E
+0B62:  MOVLW  01
+0B64:  MOVWF  FEA
+0B66:  MOVLW  BA
+0B68:  MOVWF  FE9
+0B6A:  MOVFF  FF2,1F6
+0B6E:  BCF    FF2.7
+0B70:  MOVLW  00
+0B72:  MOVLB  0
+0B74:  CALL   014A
+0B78:  TBLRD*-
+0B7A:  TBLRD*+
+0B7C:  MOVF   FF5,W
+0B7E:  MOVWF  FEE
+0B80:  IORLW  00
+0B82:  BNZ   0B7A
+0B84:  MOVLB  1
+0B86:  BTFSC  xF6.7
+0B88:  BSF    FF2.7
+0B8A:  MOVLB  2
+0B8C:  CLRF   x49
+0B8E:  MOVLW  E8
+0B90:  MOVWF  x48
+0B92:  MOVLW  01
+0B94:  MOVWF  x4B
+0B96:  MOVLW  BA
+0B98:  MOVWF  x4A
+0B9A:  MOVLB  0
+0B9C:  RCALL  0496
+0B9E:  MOVFF  02,17F
+0BA2:  MOVFF  01,17E
 ....................       if(posicao_valor_comando!= 0){ 
-0B9C:  MOVLB  1
-0B9E:  MOVF   x7E,F
-0BA0:  BNZ   0BA6
-0BA2:  MOVF   x7F,F
-0BA4:  BZ    0C04
+0BA6:  MOVLB  1
+0BA8:  MOVF   x7E,F
+0BAA:  BNZ   0BB0
+0BAC:  MOVF   x7F,F
+0BAE:  BZ    0C0E
 ....................           
 ....................         limpa_numeros();  
-0BA6:  MOVLB  0
-0BA8:  BRA    09EC
+0BB0:  MOVLB  0
+0BB2:  BRA    09EE
 ....................         get_numero(14,25,numero); 
-0BAA:  MOVLW  0E
-0BAC:  MOVLB  1
-0BAE:  MOVWF  xF6
-0BB0:  MOVLW  19
-0BB2:  MOVWF  xF7
-0BB4:  MOVLW  01
-0BB6:  MOVWF  xF9
-0BB8:  MOVLW  C9
-0BBA:  MOVWF  xF8
-0BBC:  MOVLB  0
-0BBE:  RCALL  08BE
+0BB4:  MOVLW  0E
+0BB6:  MOVLB  1
+0BB8:  MOVWF  xF6
+0BBA:  MOVLW  19
+0BBC:  MOVWF  xF7
+0BBE:  MOVLW  01
+0BC0:  MOVWF  xF9
+0BC2:  MOVLW  C9
+0BC4:  MOVWF  xF8
+0BC6:  MOVLB  0
+0BC8:  RCALL  08C0
 ....................         Send_SMS(numero,"OK CLEAR ALL"); 
-0BC0:  MOVLW  01
-0BC2:  MOVWF  FEA
-0BC4:  MOVLW  E9
-0BC6:  MOVWF  FE9
-0BC8:  MOVFF  FF2,1F6
-0BCC:  BCF    FF2.7
-0BCE:  MOVLW  0D
-0BD0:  MOVWF  01
-0BD2:  CLRF   FF7
-0BD4:  MOVLW  00
-0BD6:  CALL   016C
-0BDA:  TBLRD*-
-0BDC:  TBLRD*+
-0BDE:  MOVFF  FF5,FEE
-0BE2:  DECFSZ 01,F
-0BE4:  BRA    0BDC
-0BE6:  MOVLB  1
-0BE8:  BTFSC  xF6.7
-0BEA:  BSF    FF2.7
-0BEC:  MOVLW  01
-0BEE:  MOVWF  xF9
-0BF0:  MOVLW  C9
-0BF2:  MOVWF  xF8
-0BF4:  MOVLW  01
-0BF6:  MOVWF  xFB
-0BF8:  MOVLW  E9
-0BFA:  MOVWF  xFA
-0BFC:  MOVLB  0
-0BFE:  RCALL  061C
+0BCA:  MOVLW  01
+0BCC:  MOVWF  FEA
+0BCE:  MOVLW  E9
+0BD0:  MOVWF  FE9
+0BD2:  MOVFF  FF2,1F6
+0BD6:  BCF    FF2.7
+0BD8:  MOVLW  0D
+0BDA:  MOVWF  01
+0BDC:  CLRF   FF7
+0BDE:  MOVLW  00
+0BE0:  CALL   016C
+0BE4:  TBLRD*-
+0BE6:  TBLRD*+
+0BE8:  MOVFF  FF5,FEE
+0BEC:  DECFSZ 01,F
+0BEE:  BRA    0BE6
+0BF0:  MOVLB  1
+0BF2:  BTFSC  xF6.7
+0BF4:  BSF    FF2.7
+0BF6:  MOVLW  01
+0BF8:  MOVWF  xF9
+0BFA:  MOVLW  C9
+0BFC:  MOVWF  xF8
+0BFE:  MOVLW  01
+0C00:  MOVWF  xFB
+0C02:  MOVLW  E9
+0C04:  MOVWF  xFA
+0C06:  MOVLB  0
+0C08:  RCALL  061E
 ....................         break; 
-0C00:  BRA    0C06
-0C02:  MOVLB  1
+0C0A:  BRA    0C10
+0C0C:  MOVLB  1
 ....................       } 
 ....................           
 ....................     break; 
-0C04:  MOVLB  0
+0C0E:  MOVLB  0
 ....................  
 ....................  
 ....................   } 
 ....................  
 ....................   return; 
-0C06:  RETURN 0
+0C10:  RETURN 0
 ....................  
 .................... } 
 ....................  
@@ -3165,90 +3170,99 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................  
 .................... void get_numero(int nro_caracteres, int posicao, char *destino){ 
 *
-08BE:  MOVLB  1
-08C0:  CLRF   xFA
+08C0:  MOVLB  1
+08C2:  CLRF   xFA
 ....................  
 ....................   int8 index = 0; 
 ....................  
 ....................   for(index = 0;index< nro_caracteres;index++){ 
-08C2:  CLRF   xFA
-08C4:  MOVF   xF6,W
-08C6:  SUBWF  xFA,W
-08C8:  BC    08FE
+08C4:  CLRF   xFA
+08C6:  MOVF   xF6,W
+08C8:  SUBWF  xFA,W
+08CA:  BC    0900
 ....................  
 ....................     destino[index] = comando_recibido_BUFF[index+posicao]; 
-08CA:  CLRF   03
-08CC:  MOVF   xFA,W
-08CE:  ADDWF  xF8,W
-08D0:  MOVWF  01
-08D2:  MOVF   xF9,W
-08D4:  ADDWFC 03,F
-08D6:  MOVFF  03,1FC
-08DA:  MOVF   xF7,W
-08DC:  ADDWF  xFA,W
-08DE:  CLRF   03
-08E0:  ADDLW  E8
-08E2:  MOVWF  FE9
-08E4:  MOVLW  00
-08E6:  ADDWFC 03,W
-08E8:  MOVWF  FEA
-08EA:  MOVFF  FEF,1FD
-08EE:  MOVFF  1FC,FEA
-08F2:  MOVFF  01,FE9
-08F6:  MOVFF  1FD,FEF
-08FA:  INCF   xFA,F
-08FC:  BRA    08C4
+08CC:  CLRF   03
+08CE:  MOVF   xFA,W
+08D0:  ADDWF  xF8,W
+08D2:  MOVWF  01
+08D4:  MOVF   xF9,W
+08D6:  ADDWFC 03,F
+08D8:  MOVFF  03,1FC
+08DC:  MOVF   xF7,W
+08DE:  ADDWF  xFA,W
+08E0:  CLRF   03
+08E2:  ADDLW  E8
+08E4:  MOVWF  FE9
+08E6:  MOVLW  00
+08E8:  ADDWFC 03,W
+08EA:  MOVWF  FEA
+08EC:  MOVFF  FEF,1FD
+08F0:  MOVFF  1FC,FEA
+08F4:  MOVFF  01,FE9
+08F8:  MOVFF  1FD,FEF
+08FC:  INCF   xFA,F
+08FE:  BRA    08C6
 ....................  
 ....................   } 
 ....................  
 ....................   destino[index] = '\0'; 
-08FE:  CLRF   03
-0900:  MOVF   xFA,W
-0902:  ADDWF  xF8,W
-0904:  MOVWF  FE9
-0906:  MOVF   xF9,W
-0908:  ADDWFC 03,W
-090A:  MOVWF  FEA
-090C:  CLRF   FEF
+0900:  CLRF   03
+0902:  MOVF   xFA,W
+0904:  ADDWF  xF8,W
+0906:  MOVWF  FE9
+0908:  MOVF   xF9,W
+090A:  ADDWFC 03,W
+090C:  MOVWF  FEA
+090E:  CLRF   FEF
 ....................  
 ....................   return; 
-090E:  MOVLB  0
-0910:  RETURN 0
+0910:  MOVLB  0
+0912:  RETURN 0
 .................... } 
 ....................  
 .................... void clear_command(){ 
 ....................  
 ....................   delay_ms(200); 
 *
-0C08:  MOVLW  C8
-0C0A:  MOVLB  2
-0C0C:  MOVWF  x46
-0C0E:  MOVLB  0
-0C10:  CALL   03D4
+0C12:  MOVLW  C8
+0C14:  MOVLB  2
+0C16:  MOVWF  x46
+0C18:  MOVLB  0
+0C1A:  CALL   03D4
 ....................   memset (comando_recibido_UART, 0x00, sizeof(comando_recibido_UART)); 
-0C14:  CLRF   FEA
-0C16:  MOVLW  52
-0C18:  MOVWF  FE9
-0C1A:  CLRF   00
-0C1C:  CLRF   02
-0C1E:  MOVLW  96
-0C20:  MOVWF  01
-0C22:  RCALL  09D2
+0C1E:  CLRF   FEA
+0C20:  MOVLW  52
+0C22:  MOVWF  FE9
+0C24:  CLRF   00
+0C26:  CLRF   02
+0C28:  MOVLW  96
+0C2A:  MOVWF  01
+0C2C:  RCALL  09D4
+....................   memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF)); 
+0C2E:  CLRF   FEA
+0C30:  MOVLW  E8
+0C32:  MOVWF  FE9
+0C34:  CLRF   00
+0C36:  CLRF   02
+0C38:  MOVLW  96
+0C3A:  MOVWF  01
+0C3C:  RCALL  09D4
 ....................  
 ....................   comando_disponivel_UART = FALSE; 
-0C24:  MOVLB  1
-0C26:  BCF    x82.0
+0C3E:  MOVLB  1
+0C40:  BCF    x82.0
 ....................   enable_interrupts(GLOBAL); 
-0C28:  MOVLW  C0
-0C2A:  IORWF  FF2,F
+0C42:  MOVLW  C0
+0C44:  IORWF  FF2,F
 ....................   enable_interrupts(INT_RTCC); 
-0C2C:  BSF    FF2.5
+0C46:  BSF    FF2.5
 ....................   enable_interrupts(INT_RDA); 
-0C2E:  BSF    F9D.5
+0C48:  BSF    F9D.5
 ....................    
 ....................   return; 
-0C30:  MOVLB  0
-0C32:  GOTO   0CD0 (RETURN)
+0C4A:  MOVLB  0
+0C4C:  GOTO   0CF2 (RETURN)
 .................... } 
 ....................  
 .................... #ENDIF 
@@ -3353,58 +3367,59 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................                           
 ....................     if(comando_disponivel_UART){                                              // Caso receba a resposta  
 05CC:  BTFSS  x82.0
-05CE:  BRA    0604
-....................                         
+05CE:  BRA    0606
+....................       comando_disponivel_UART = 0;                   
+05D0:  BCF    x82.0
 ....................       posicao_valor_comando = strstr(comando_recibido_UART,recive);           // Procura a palavra recive da funcao na resposta recebida 
-05D0:  MOVLB  2
-05D2:  CLRF   x49
-05D4:  MOVLW  52
-05D6:  MOVWF  x48
-05D8:  MOVFF  23E,24B
-05DC:  MOVFF  23D,24A
-05E0:  MOVLB  0
-05E2:  RCALL  0496
-05E4:  MOVFF  02,17F
-05E8:  MOVFF  01,17E
+05D2:  MOVLB  2
+05D4:  CLRF   x49
+05D6:  MOVLW  52
+05D8:  MOVWF  x48
+05DA:  MOVFF  23E,24B
+05DE:  MOVFF  23D,24A
+05E2:  MOVLB  0
+05E4:  RCALL  0496
+05E6:  MOVFF  02,17F
+05EA:  MOVFF  01,17E
 ....................                  
 ....................       if(posicao_valor_comando!= 0){                                          // Caso encontre a resposta esperada 
-05EC:  MOVLB  1
-05EE:  MOVF   x7E,F
-05F0:  BNZ   05F6
-05F2:  MOVF   x7F,F
-05F4:  BZ    0604
+05EE:  MOVLB  1
+05F0:  MOVF   x7E,F
+05F2:  BNZ   05F8
+05F4:  MOVF   x7F,F
+05F6:  BZ    0606
 ....................         enable_interrupts(INT_RDA); 
-05F6:  BSF    F9D.5
+05F8:  BSF    F9D.5
 ....................         enable_interrupts(INT_RTCC); 
-05F8:  BSF    FF2.5
+05FA:  BSF    FF2.5
 ....................         enable_interrupts(GLOBAL); 
-05FA:  MOVLW  C0
-05FC:  IORWF  FF2,F
+05FC:  MOVLW  C0
+05FE:  IORWF  FF2,F
 ....................         return 1; 
-05FE:  MOVLW  01
-0600:  MOVWF  01
-0602:  BRA    0618
+0600:  MOVLW  01
+0602:  MOVWF  01
+0604:  BRA    061A
 ....................       } 
 ....................     } 
 ....................   }while(--tentativas>0);                 
-0604:  MOVLB  2
-0606:  DECFSZ x3F,F
-0608:  BRA    053C
+0606:  MOVLB  2
+0608:  DECFSZ x3F,F
+060A:  BRA    053C
 ....................    
 ....................   enable_interrupts(GLOBAL); 
-060A:  MOVLW  C0
-060C:  IORWF  FF2,F
+060C:  MOVLW  C0
+060E:  IORWF  FF2,F
 ....................   enable_interrupts(INT_RDA); 
-060E:  BSF    F9D.5
+0610:  BSF    F9D.5
 ....................   enable_interrupts(INT_RTCC); 
-0610:  BSF    FF2.5
+0612:  BSF    FF2.5
 ....................  
 ....................   return 0; 
-0612:  MOVLW  00
-0614:  MOVWF  01
-0616:  MOVLB  1
-0618:  MOVLB  0
-061A:  RETURN 0
+0614:  MOVLW  00
+0616:  MOVWF  01
+0618:  MOVLB  1
+061A:  MOVLB  0
+061C:  RETURN 0
 .................... } 
 ....................  
 .................... int1 Send_SMS(char *numero,char *mensagem){ 
@@ -3412,252 +3427,252 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................   char numero_envio[35]; 
 ....................  
 ....................   sprintf(numero_envio,"AT+CMGS=\"%s\"\r\n",numero); 
-061C:  MOVLW  01
-061E:  MOVLB  1
-0620:  MOVWF  x88
-0622:  MOVLW  FC
-0624:  MOVWF  x87
-0626:  MOVLW  84
-0628:  MOVWF  FF6
-062A:  MOVLW  03
-062C:  MOVWF  FF7
-062E:  MOVLW  09
-0630:  MOVLB  2
-0632:  MOVWF  x37
-0634:  MOVLB  0
-0636:  RCALL  0420
-0638:  MOVFF  1F9,FEA
-063C:  MOVFF  1F8,FE9
-0640:  BRA    0448
-0642:  MOVLW  8F
-0644:  MOVWF  FF6
-0646:  MOVLW  03
-0648:  MOVWF  FF7
-064A:  MOVLW  03
-064C:  MOVLB  2
-064E:  MOVWF  x37
-0650:  MOVLB  0
-0652:  RCALL  0420
+061E:  MOVLW  01
+0620:  MOVLB  1
+0622:  MOVWF  x88
+0624:  MOVLW  FC
+0626:  MOVWF  x87
+0628:  MOVLW  84
+062A:  MOVWF  FF6
+062C:  MOVLW  03
+062E:  MOVWF  FF7
+0630:  MOVLW  09
+0632:  MOVLB  2
+0634:  MOVWF  x37
+0636:  MOVLB  0
+0638:  RCALL  0420
+063A:  MOVFF  1F9,FEA
+063E:  MOVFF  1F8,FE9
+0642:  BRA    0448
+0644:  MOVLW  8F
+0646:  MOVWF  FF6
+0648:  MOVLW  03
+064A:  MOVWF  FF7
+064C:  MOVLW  03
+064E:  MOVLB  2
+0650:  MOVWF  x37
+0652:  MOVLB  0
+0654:  RCALL  0420
 ....................  
 ....................   if(envia_SIM800L("AT+CMGF=1\r\n","OK")) 
-0654:  MOVLW  02
-0656:  MOVWF  FEA
-0658:  MOVLW  1F
-065A:  MOVWF  FE9
-065C:  MOVFF  FF2,237
-0660:  BCF    FF2.7
-0662:  MOVLW  0C
-0664:  MOVWF  01
-0666:  CLRF   FF7
-0668:  MOVLW  00
-066A:  RCALL  0194
-066C:  TBLRD*-
-066E:  TBLRD*+
-0670:  MOVFF  FF5,FEE
-0674:  DECFSZ 01,F
-0676:  BRA    066E
-0678:  MOVLB  2
-067A:  BTFSC  x37.7
-067C:  BSF    FF2.7
-067E:  MOVLW  4F
-0680:  MOVWF  x2B
-0682:  MOVLW  4B
-0684:  MOVWF  x2C
-0686:  CLRF   x2D
-0688:  MOVLW  02
-068A:  MOVWF  x3C
-068C:  MOVLW  1F
-068E:  MOVWF  x3B
-0690:  MOVLW  02
-0692:  MOVWF  x3E
-0694:  MOVLW  2B
-0696:  MOVWF  x3D
-0698:  MOVLB  0
-069A:  RCALL  052E
-069C:  MOVF   01,F
-069E:  BZ    0754
+0656:  MOVLW  02
+0658:  MOVWF  FEA
+065A:  MOVLW  1F
+065C:  MOVWF  FE9
+065E:  MOVFF  FF2,237
+0662:  BCF    FF2.7
+0664:  MOVLW  0C
+0666:  MOVWF  01
+0668:  CLRF   FF7
+066A:  MOVLW  00
+066C:  RCALL  0194
+066E:  TBLRD*-
+0670:  TBLRD*+
+0672:  MOVFF  FF5,FEE
+0676:  DECFSZ 01,F
+0678:  BRA    0670
+067A:  MOVLB  2
+067C:  BTFSC  x37.7
+067E:  BSF    FF2.7
+0680:  MOVLW  4F
+0682:  MOVWF  x2B
+0684:  MOVLW  4B
+0686:  MOVWF  x2C
+0688:  CLRF   x2D
+068A:  MOVLW  02
+068C:  MOVWF  x3C
+068E:  MOVLW  1F
+0690:  MOVWF  x3B
+0692:  MOVLW  02
+0694:  MOVWF  x3E
+0696:  MOVLW  2B
+0698:  MOVWF  x3D
+069A:  MOVLB  0
+069C:  RCALL  052E
+069E:  MOVF   01,F
+06A0:  BZ    0756
 ....................     if(envia_SIM800L("AT+CSMP=17,255,0,0\r\n","OK")) 
-06A0:  MOVLW  02
-06A2:  MOVWF  FEA
-06A4:  MOVLW  1F
-06A6:  MOVWF  FE9
-06A8:  MOVFF  FF2,237
-06AC:  BCF    FF2.7
-06AE:  MOVLW  15
-06B0:  MOVWF  01
-06B2:  CLRF   FF7
-06B4:  MOVLW  00
-06B6:  RCALL  01BA
-06B8:  TBLRD*-
-06BA:  TBLRD*+
-06BC:  MOVFF  FF5,FEE
-06C0:  DECFSZ 01,F
-06C2:  BRA    06BA
-06C4:  MOVLB  2
-06C6:  BTFSC  x37.7
-06C8:  BSF    FF2.7
-06CA:  MOVLW  4F
-06CC:  MOVWF  x34
-06CE:  MOVLW  4B
-06D0:  MOVWF  x35
-06D2:  CLRF   x36
-06D4:  MOVLW  02
-06D6:  MOVWF  x3C
-06D8:  MOVLW  1F
-06DA:  MOVWF  x3B
-06DC:  MOVLW  02
-06DE:  MOVWF  x3E
-06E0:  MOVLW  34
-06E2:  MOVWF  x3D
-06E4:  MOVLB  0
-06E6:  RCALL  052E
-06E8:  MOVF   01,F
-06EA:  BZ    0754
+06A2:  MOVLW  02
+06A4:  MOVWF  FEA
+06A6:  MOVLW  1F
+06A8:  MOVWF  FE9
+06AA:  MOVFF  FF2,237
+06AE:  BCF    FF2.7
+06B0:  MOVLW  15
+06B2:  MOVWF  01
+06B4:  CLRF   FF7
+06B6:  MOVLW  00
+06B8:  RCALL  01BA
+06BA:  TBLRD*-
+06BC:  TBLRD*+
+06BE:  MOVFF  FF5,FEE
+06C2:  DECFSZ 01,F
+06C4:  BRA    06BC
+06C6:  MOVLB  2
+06C8:  BTFSC  x37.7
+06CA:  BSF    FF2.7
+06CC:  MOVLW  4F
+06CE:  MOVWF  x34
+06D0:  MOVLW  4B
+06D2:  MOVWF  x35
+06D4:  CLRF   x36
+06D6:  MOVLW  02
+06D8:  MOVWF  x3C
+06DA:  MOVLW  1F
+06DC:  MOVWF  x3B
+06DE:  MOVLW  02
+06E0:  MOVWF  x3E
+06E2:  MOVLW  34
+06E4:  MOVWF  x3D
+06E6:  MOVLB  0
+06E8:  RCALL  052E
+06EA:  MOVF   01,F
+06EC:  BZ    0756
 ....................       if(envia_SIM800L(numero_envio, ">")) 
-06EC:  MOVLW  3E
-06EE:  MOVLB  2
-06F0:  MOVWF  x1F
-06F2:  CLRF   x20
-06F4:  MOVLW  01
-06F6:  MOVWF  x3C
-06F8:  MOVLW  FC
-06FA:  MOVWF  x3B
-06FC:  MOVLW  02
-06FE:  MOVWF  x3E
-0700:  MOVLW  1F
-0702:  MOVWF  x3D
-0704:  MOVLB  0
-0706:  RCALL  052E
-0708:  MOVF   01,F
-070A:  BZ    0754
+06EE:  MOVLW  3E
+06F0:  MOVLB  2
+06F2:  MOVWF  x1F
+06F4:  CLRF   x20
+06F6:  MOVLW  01
+06F8:  MOVWF  x3C
+06FA:  MOVLW  FC
+06FC:  MOVWF  x3B
+06FE:  MOVLW  02
+0700:  MOVWF  x3E
+0702:  MOVLW  1F
+0704:  MOVWF  x3D
+0706:  MOVLB  0
+0708:  RCALL  052E
+070A:  MOVF   01,F
+070C:  BZ    0756
 ....................         if(envia_SIM800L(mensagem, "+CMGS:")) 
-070C:  MOVLW  02
-070E:  MOVWF  FEA
-0710:  MOVLW  1F
-0712:  MOVWF  FE9
-0714:  MOVFF  FF2,237
-0718:  BCF    FF2.7
-071A:  MOVLW  07
-071C:  MOVWF  01
-071E:  CLRF   FF7
-0720:  MOVLW  00
-0722:  RCALL  01EA
-0724:  TBLRD*-
-0726:  TBLRD*+
-0728:  MOVFF  FF5,FEE
-072C:  DECFSZ 01,F
-072E:  BRA    0726
-0730:  MOVLB  2
-0732:  BTFSC  x37.7
-0734:  BSF    FF2.7
-0736:  MOVFF  1FB,23C
-073A:  MOVFF  1FA,23B
-073E:  MOVLW  02
-0740:  MOVWF  x3E
-0742:  MOVLW  1F
-0744:  MOVWF  x3D
-0746:  MOVLB  0
-0748:  RCALL  052E
-074A:  MOVF   01,F
-074C:  BZ    0754
+070E:  MOVLW  02
+0710:  MOVWF  FEA
+0712:  MOVLW  1F
+0714:  MOVWF  FE9
+0716:  MOVFF  FF2,237
+071A:  BCF    FF2.7
+071C:  MOVLW  07
+071E:  MOVWF  01
+0720:  CLRF   FF7
+0722:  MOVLW  00
+0724:  RCALL  01EA
+0726:  TBLRD*-
+0728:  TBLRD*+
+072A:  MOVFF  FF5,FEE
+072E:  DECFSZ 01,F
+0730:  BRA    0728
+0732:  MOVLB  2
+0734:  BTFSC  x37.7
+0736:  BSF    FF2.7
+0738:  MOVFF  1FB,23C
+073C:  MOVFF  1FA,23B
+0740:  MOVLW  02
+0742:  MOVWF  x3E
+0744:  MOVLW  1F
+0746:  MOVWF  x3D
+0748:  MOVLB  0
+074A:  RCALL  052E
+074C:  MOVF   01,F
+074E:  BZ    0756
 ....................           return 1; 
-074E:  MOVLW  01
-0750:  MOVWF  01
-0752:  BRA    0758
+0750:  MOVLW  01
+0752:  MOVWF  01
+0754:  BRA    075A
 ....................   return 0; 
-0754:  MOVLW  00
-0756:  MOVWF  01
-0758:  RETURN 0
+0756:  MOVLW  00
+0758:  MOVWF  01
+075A:  RETURN 0
 .................... } 
 ....................  
 .................... int1 Read_SMS(){ 
 ....................    
 ....................   if(envia_SIM800L("AT+CMGF=1\r\n","OK")){ 
 *
-0818:  MOVLW  01
-081A:  MOVWF  FEA
-081C:  MOVLW  F6
-081E:  MOVWF  FE9
-0820:  MOVFF  FF2,20E
-0824:  BCF    FF2.7
-0826:  MOVLW  0C
-0828:  MOVWF  01
-082A:  CLRF   FF7
-082C:  MOVLW  00
-082E:  RCALL  0194
-0830:  TBLRD*-
-0832:  TBLRD*+
-0834:  MOVFF  FF5,FEE
-0838:  DECFSZ 01,F
-083A:  BRA    0832
-083C:  MOVLB  2
-083E:  BTFSC  x0E.7
-0840:  BSF    FF2.7
-0842:  MOVLW  4F
-0844:  MOVWF  x02
-0846:  MOVLW  4B
-0848:  MOVWF  x03
-084A:  CLRF   x04
-084C:  MOVLW  01
-084E:  MOVWF  x3C
-0850:  MOVLW  F6
-0852:  MOVWF  x3B
-0854:  MOVLW  02
-0856:  MOVWF  x3E
-0858:  MOVWF  x3D
-085A:  MOVLB  0
-085C:  RCALL  052E
-085E:  MOVF   01,F
-0860:  BZ    08B2
+081A:  MOVLW  01
+081C:  MOVWF  FEA
+081E:  MOVLW  F6
+0820:  MOVWF  FE9
+0822:  MOVFF  FF2,20E
+0826:  BCF    FF2.7
+0828:  MOVLW  0C
+082A:  MOVWF  01
+082C:  CLRF   FF7
+082E:  MOVLW  00
+0830:  RCALL  0194
+0832:  TBLRD*-
+0834:  TBLRD*+
+0836:  MOVFF  FF5,FEE
+083A:  DECFSZ 01,F
+083C:  BRA    0834
+083E:  MOVLB  2
+0840:  BTFSC  x0E.7
+0842:  BSF    FF2.7
+0844:  MOVLW  4F
+0846:  MOVWF  x02
+0848:  MOVLW  4B
+084A:  MOVWF  x03
+084C:  CLRF   x04
+084E:  MOVLW  01
+0850:  MOVWF  x3C
+0852:  MOVLW  F6
+0854:  MOVWF  x3B
+0856:  MOVLW  02
+0858:  MOVWF  x3E
+085A:  MOVWF  x3D
+085C:  MOVLB  0
+085E:  RCALL  052E
+0860:  MOVF   01,F
+0862:  BZ    08B4
 ....................     if(envia_SIM800L("AT+CMGL=\"REC UNREAD\"\r\n", "")){ 
-0862:  MOVLW  01
-0864:  MOVWF  FEA
-0866:  MOVLW  F6
-0868:  MOVWF  FE9
-086A:  MOVFF  FF2,20E
-086E:  BCF    FF2.7
-0870:  MOVLW  17
-0872:  MOVWF  01
-0874:  CLRF   FF7
-0876:  MOVLW  00
-0878:  RCALL  020C
-087A:  TBLRD*-
-087C:  TBLRD*+
-087E:  MOVFF  FF5,FEE
-0882:  DECFSZ 01,F
-0884:  BRA    087C
-0886:  MOVLB  2
-0888:  BTFSC  x0E.7
-088A:  BSF    FF2.7
-088C:  CLRF   x0D
-088E:  MOVLW  01
-0890:  MOVWF  x3C
-0892:  MOVLW  F6
-0894:  MOVWF  x3B
-0896:  MOVLW  02
-0898:  MOVWF  x3E
-089A:  MOVLW  0D
-089C:  MOVWF  x3D
-089E:  MOVLB  0
-08A0:  RCALL  052E
-08A2:  MOVF   01,F
-08A4:  BZ    08B2
+0864:  MOVLW  01
+0866:  MOVWF  FEA
+0868:  MOVLW  F6
+086A:  MOVWF  FE9
+086C:  MOVFF  FF2,20E
+0870:  BCF    FF2.7
+0872:  MOVLW  17
+0874:  MOVWF  01
+0876:  CLRF   FF7
+0878:  MOVLW  00
+087A:  RCALL  020C
+087C:  TBLRD*-
+087E:  TBLRD*+
+0880:  MOVFF  FF5,FEE
+0884:  DECFSZ 01,F
+0886:  BRA    087E
+0888:  MOVLB  2
+088A:  BTFSC  x0E.7
+088C:  BSF    FF2.7
+088E:  CLRF   x0D
+0890:  MOVLW  01
+0892:  MOVWF  x3C
+0894:  MOVLW  F6
+0896:  MOVWF  x3B
+0898:  MOVLW  02
+089A:  MOVWF  x3E
+089C:  MOVLW  0D
+089E:  MOVWF  x3D
+08A0:  MOVLB  0
+08A2:  RCALL  052E
+08A4:  MOVF   01,F
+08A6:  BZ    08B4
 ....................       resposta_SIM = true; 
-08A6:  MOVLB  1
-08A8:  BSF    x82.1
+08A8:  MOVLB  1
+08AA:  BSF    x82.1
 ....................       return 1;     
-08AA:  MOVLW  01
-08AC:  MOVWF  01
-08AE:  BRA    08B8
-08B0:  MOVLB  0
+08AC:  MOVLW  01
+08AE:  MOVWF  01
+08B0:  BRA    08BA
+08B2:  MOVLB  0
 ....................     }   
 ....................   } 
 ....................   return 0; 
-08B2:  MOVLW  00
-08B4:  MOVWF  01
-08B6:  MOVLB  1
-08B8:  MOVLB  0
-08BA:  GOTO   0C06 (RETURN)
+08B4:  MOVLW  00
+08B6:  MOVWF  01
+08B8:  MOVLB  1
+08BA:  MOVLB  0
+08BC:  GOTO   0C10 (RETURN)
 .................... } 
 ....................  
 ....................  
@@ -3728,300 +3743,305 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................  
 .................... void main() 
 *
-0CD8:  CLRF   FF8
-0CDA:  BCF    FD0.7
-0CDC:  BSF    07.7
-0CDE:  CLRF   16
-0CE0:  BSF    FB8.3
-0CE2:  MOVLW  22
-0CE4:  MOVWF  FAF
-0CE6:  MOVLW  00
-0CE8:  MOVWF  FB0
-0CEA:  MOVLW  A6
-0CEC:  MOVWF  FAC
-0CEE:  MOVLW  90
-0CF0:  MOVWF  FAB
-0CF2:  CLRF   4F
-0CF4:  MOVLB  1
-0CF6:  CLRF   x7F
-0CF8:  CLRF   x7E
-0CFA:  MOVLW  86
-0CFC:  MOVWF  x81
-0CFE:  MOVLW  A0
-0D00:  MOVWF  x80
-0D02:  CLRF   x86
-0D04:  MOVLW  6A
-0D06:  MOVWF  x85
-0D08:  MOVLW  CF
-0D0A:  MOVWF  x84
-0D0C:  MOVLW  C0
-0D0E:  MOVWF  x83
-0D10:  CLRF   x88
-0D12:  CLRF   x87
-0D14:  BCF    x82.0
-0D16:  BCF    x82.2
-0D18:  BCF    x82.3
-0D1A:  CLRF   x8A
-0D1C:  CLRF   x89
-0D1E:  CLRF   x8C
-0D20:  CLRF   x8B
-0D22:  CLRF   x8D
-0D24:  BCF    x82.1
-0D26:  MOVF   FC1,W
-0D28:  ANDLW  C0
-0D2A:  IORLW  0F
-0D2C:  MOVWF  FC1
-0D2E:  MOVLW  07
-0D30:  MOVWF  FB4
-0D32:  CLRF   17
-0D34:  CLRF   18
+0CFA:  CLRF   FF8
+0CFC:  BCF    FD0.7
+0CFE:  BSF    07.7
+0D00:  CLRF   16
+0D02:  BSF    FB8.3
+0D04:  MOVLW  22
+0D06:  MOVWF  FAF
+0D08:  MOVLW  00
+0D0A:  MOVWF  FB0
+0D0C:  MOVLW  A6
+0D0E:  MOVWF  FAC
+0D10:  MOVLW  90
+0D12:  MOVWF  FAB
+0D14:  CLRF   4F
+0D16:  MOVLB  1
+0D18:  CLRF   x7F
+0D1A:  CLRF   x7E
+0D1C:  MOVLW  86
+0D1E:  MOVWF  x81
+0D20:  MOVLW  A0
+0D22:  MOVWF  x80
+0D24:  CLRF   x86
+0D26:  MOVLW  6A
+0D28:  MOVWF  x85
+0D2A:  MOVLW  CF
+0D2C:  MOVWF  x84
+0D2E:  MOVLW  C0
+0D30:  MOVWF  x83
+0D32:  CLRF   x88
+0D34:  CLRF   x87
+0D36:  BCF    x82.0
+0D38:  BCF    x82.2
+0D3A:  BCF    x82.3
+0D3C:  CLRF   x8A
+0D3E:  CLRF   x89
+0D40:  CLRF   x8C
+0D42:  CLRF   x8B
+0D44:  CLRF   x8D
+0D46:  BCF    x82.1
+0D48:  MOVF   FC1,W
+0D4A:  ANDLW  C0
+0D4C:  IORLW  0F
+0D4E:  MOVWF  FC1
+0D50:  MOVLW  07
+0D52:  MOVWF  FB4
+0D54:  CLRF   17
+0D56:  CLRF   18
 .................... { 
 ....................   set_tris_a (0b00000000);                                                     //Ra7-Ra6-Ra5-Ra4-Ra3-Ra2-Ra1-Ra0 
-0D36:  MOVLW  00
-0D38:  MOVWF  F92
+0D58:  MOVLW  00
+0D5A:  MOVWF  F92
 ....................   set_tris_b (0b00000000);                                                     //Rb7-Rb6-Rb5-Rb4-Rb3-Rb2-Rb1-Rb0 
-0D3A:  MOVWF  F93
+0D5C:  MOVWF  F93
 ....................   set_tris_c (0b10000000);                                                     //Rc7-Rc6-Rc5-Rc4-Rc3-Rc2-Rc1-Rc0 
-0D3C:  MOVLW  80
-0D3E:  MOVWF  F94
+0D5E:  MOVLW  80
+0D60:  MOVWF  F94
 ....................   set_tris_d (0b00000000);  
-0D40:  MOVLW  00
-0D42:  MOVWF  F95
+0D62:  MOVLW  00
+0D64:  MOVWF  F95
 ....................    
 ....................   setup_adc_ports(NO_ANALOGS); 
-0D44:  MOVF   FC1,W
-0D46:  ANDLW  C0
-0D48:  IORLW  0F
-0D4A:  MOVWF  FC1
+0D66:  MOVF   FC1,W
+0D68:  ANDLW  C0
+0D6A:  IORLW  0F
+0D6C:  MOVWF  FC1
 ....................   setup_adc(ADC_OFF); 
-0D4C:  BCF    FC2.0
+0D6E:  BCF    FC2.0
 ....................   setup_wdt(WDT_OFF); 
-0D4E:  BCF    FD1.0
+0D70:  BCF    FD1.0
 ....................   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_16 | RTCC_8_BIT); 
-0D50:  MOVLW  C3
-0D52:  MOVWF  FD5
+0D72:  MOVLW  C3
+0D74:  MOVWF  FD5
 ....................   set_timer0(6); 
-0D54:  CLRF   FD7
-0D56:  MOVLW  06
-0D58:  MOVWF  FD6
+0D76:  CLRF   FD7
+0D78:  MOVLW  06
+0D7A:  MOVWF  FD6
 ....................    
 ....................   enable_interrupts(INT_TIMER0); 
-0D5A:  BSF    FF2.5
+0D7C:  BSF    FF2.5
 ....................   enable_interrupts(INT_RDA); 
-0D5C:  BSF    F9D.5
+0D7E:  BSF    F9D.5
 ....................   enable_interrupts(GLOBAL);  
-0D5E:  MOVLW  C0
-0D60:  IORWF  FF2,F
+0D80:  MOVLW  C0
+0D82:  IORWF  FF2,F
 ....................   output_high(PIN_C5); 
-0D62:  BSF    F8B.5
+0D84:  BSF    F8B.5
 ....................   delay_ms(2000); 
-0D64:  MOVLW  08
-0D66:  MOVWF  xA8
-0D68:  MOVLW  FA
-0D6A:  MOVLB  2
-0D6C:  MOVWF  x46
-0D6E:  MOVLB  0
-0D70:  CALL   03D4
-0D74:  MOVLB  1
-0D76:  DECFSZ xA8,F
-0D78:  BRA    0D68
+0D86:  MOVLW  08
+0D88:  MOVWF  xA8
+0D8A:  MOVLW  FA
+0D8C:  MOVLB  2
+0D8E:  MOVWF  x46
+0D90:  MOVLB  0
+0D92:  CALL   03D4
+0D96:  MOVLB  1
+0D98:  DECFSZ xA8,F
+0D9A:  BRA    0D8A
 ....................   output_low(PIN_C5); 
-0D7A:  BCF    F8B.5
+0D9C:  BCF    F8B.5
 ....................   delay_ms(5000); 
-0D7C:  MOVLW  14
-0D7E:  MOVWF  xA8
-0D80:  MOVLW  FA
-0D82:  MOVLB  2
-0D84:  MOVWF  x46
-0D86:  MOVLB  0
-0D88:  CALL   03D4
-0D8C:  MOVLB  1
-0D8E:  DECFSZ xA8,F
-0D90:  BRA    0D80
-....................   Send_SMS("031995822739","INICIANDO..."); 
-0D92:  MOVLW  01
-0D94:  MOVWF  FEA
-0D96:  MOVLW  8E
-0D98:  MOVWF  FE9
-0D9A:  MOVFF  FF2,1A8
-0D9E:  BCF    FF2.7
-0DA0:  MOVLW  0D
-0DA2:  MOVWF  01
-0DA4:  CLRF   FF7
-0DA6:  MOVLW  00
+0D9E:  MOVLW  14
+0DA0:  MOVWF  xA8
+0DA2:  MOVLW  FA
+0DA4:  MOVLB  2
+0DA6:  MOVWF  x46
 0DA8:  MOVLB  0
-0DAA:  CALL   023E
-0DAE:  TBLRD*-
-0DB0:  TBLRD*+
-0DB2:  MOVFF  FF5,FEE
-0DB6:  DECFSZ 01,F
-0DB8:  BRA    0DB0
-0DBA:  MOVLB  1
-0DBC:  BTFSC  xA8.7
-0DBE:  BSF    FF2.7
-0DC0:  MOVLW  01
-0DC2:  MOVWF  FEA
-0DC4:  MOVLW  9B
-0DC6:  MOVWF  FE9
-0DC8:  MOVFF  FF2,1AA
-0DCC:  BCF    FF2.7
-0DCE:  MOVLW  0D
-0DD0:  MOVWF  01
-0DD2:  CLRF   FF7
-0DD4:  MOVLW  00
-0DD6:  MOVLB  0
-0DD8:  CALL   0266
-0DDC:  TBLRD*-
-0DDE:  TBLRD*+
-0DE0:  MOVFF  FF5,FEE
-0DE4:  DECFSZ 01,F
-0DE6:  BRA    0DDE
-0DE8:  MOVLB  1
-0DEA:  BTFSC  xAA.7
-0DEC:  BSF    FF2.7
-0DEE:  MOVLW  01
-0DF0:  MOVWF  xF9
-0DF2:  MOVLW  8E
-0DF4:  MOVWF  xF8
-0DF6:  MOVLW  01
-0DF8:  MOVWF  xFB
-0DFA:  MOVLW  9B
-0DFC:  MOVWF  xFA
-0DFE:  MOVLB  0
-0E00:  RCALL  061C
+0DAA:  CALL   03D4
+0DAE:  MOVLB  1
+0DB0:  DECFSZ xA8,F
+0DB2:  BRA    0DA2
+....................   Send_SMS("031995822739","INICIANDO..."); 
+0DB4:  MOVLW  01
+0DB6:  MOVWF  FEA
+0DB8:  MOVLW  8E
+0DBA:  MOVWF  FE9
+0DBC:  MOVFF  FF2,1A8
+0DC0:  BCF    FF2.7
+0DC2:  MOVLW  0D
+0DC4:  MOVWF  01
+0DC6:  CLRF   FF7
+0DC8:  MOVLW  00
+0DCA:  MOVLB  0
+0DCC:  CALL   023E
+0DD0:  TBLRD*-
+0DD2:  TBLRD*+
+0DD4:  MOVFF  FF5,FEE
+0DD8:  DECFSZ 01,F
+0DDA:  BRA    0DD2
+0DDC:  MOVLB  1
+0DDE:  BTFSC  xA8.7
+0DE0:  BSF    FF2.7
+0DE2:  MOVLW  01
+0DE4:  MOVWF  FEA
+0DE6:  MOVLW  9B
+0DE8:  MOVWF  FE9
+0DEA:  MOVFF  FF2,1AA
+0DEE:  BCF    FF2.7
+0DF0:  MOVLW  0D
+0DF2:  MOVWF  01
+0DF4:  CLRF   FF7
+0DF6:  MOVLW  00
+0DF8:  MOVLB  0
+0DFA:  CALL   0266
+0DFE:  TBLRD*-
+0E00:  TBLRD*+
+0E02:  MOVFF  FF5,FEE
+0E06:  DECFSZ 01,F
+0E08:  BRA    0E00
+0E0A:  MOVLB  1
+0E0C:  BTFSC  xAA.7
+0E0E:  BSF    FF2.7
+0E10:  MOVLW  01
+0E12:  MOVWF  xF9
+0E14:  MOVLW  8E
+0E16:  MOVWF  xF8
+0E18:  MOVLW  01
+0E1A:  MOVWF  xFB
+0E1C:  MOVLW  9B
+0E1E:  MOVWF  xFA
+0E20:  MOVLB  0
+0E22:  CALL   061E
 ....................    
 ....................   while(TRUE){ 
 ....................  
 ....................     if(One_Second){ 
-0E02:  MOVLB  1
-0E04:  BTFSS  x82.2
-0E06:  BRA    0E10
+0E26:  MOVLB  1
+0E28:  BTFSS  x82.2
+0E2A:  BRA    0E34
 ....................  
 ....................       One_Second = FALSE; 
-0E08:  BCF    x82.2
+0E2C:  BCF    x82.2
 ....................       Executar_Cada_Segundo(); 
-0E0A:  MOVLB  0
-0E0C:  BRA    0C36
-0E0E:  MOVLB  1
+0E2E:  MOVLB  0
+0E30:  BRA    0C50
+0E32:  MOVLB  1
 ....................  
 ....................     } 
 ....................  
 ....................     if(One_Minute){ 
-0E10:  BTFSS  x82.3
-0E12:  BRA    0E1E
+0E34:  BTFSS  x82.3
+0E36:  BRA    0E42
 ....................  
 ....................       One_Minute = FALSE; 
-0E14:  BCF    x82.3
+0E38:  BCF    x82.3
 ....................       Executar_Cada_Minuto(); 
-0E16:  MOVLB  0
-0E18:  GOTO   0004
-0E1C:  MOVLB  1
+0E3A:  MOVLB  0
+0E3C:  GOTO   0004
+0E40:  MOVLB  1
 ....................  
 ....................     } 
-0E1E:  BRA    0E04
+0E42:  BRA    0E28
 ....................  
 ....................   } 
 ....................  
 .................... } 
 ....................  
-0E20:  SLEEP 
+0E44:  SLEEP 
 .................... void Executar_Cada_Segundo(){ 
 ....................  
 ....................   if(comando_disponivel_UART){ 
 *
-0C36:  MOVLB  1
-0C38:  BTFSS  x82.0
-0C3A:  BRA    0CD2
+0C50:  MOVLB  1
+0C52:  BTFSS  x82.0
+0C54:  BRA    0CF4
 ....................    
 ....................     disable_interrupts(GLOBAL); 
-0C3C:  BCF    FF2.6
-0C3E:  BCF    FF2.7
-0C40:  BTFSC  FF2.7
-0C42:  BRA    0C3E
+0C56:  BCF    FF2.6
+0C58:  BCF    FF2.7
+0C5A:  BTFSC  FF2.7
+0C5C:  BRA    0C58
 ....................     comando = Get_Comando(); 
-0C44:  MOVLB  0
-0C46:  RCALL  075A
-0C48:  MOVFF  01,18D
+0C5E:  MOVLB  0
+0C60:  RCALL  075C
+0C62:  MOVFF  01,18D
 ....................      
 ....................     if(comando != 0){ 
-0C4C:  MOVLB  1
-0C4E:  MOVF   x8D,F
-0C50:  BZ    0C5C
+0C66:  MOVLB  1
+0C68:  MOVF   x8D,F
+0C6A:  BZ    0C76
 ....................  
 ....................       Executa_Comando(comando); 
-0C52:  MOVFF  18D,1B9
-0C56:  MOVLB  0
-0C58:  RCALL  0A02
-0C5A:  MOVLB  1
+0C6C:  MOVFF  18D,1B9
+0C70:  MOVLB  0
+0C72:  RCALL  0A04
+0C74:  MOVLB  1
 ....................        
 ....................     } 
 ....................     if(resposta_SIM == 1){ 
-0C5C:  BTFSS  x82.1
-0C5E:  BRA    0CCA
+0C76:  BTFSS  x82.1
+0C78:  BRA    0CEC
+....................       disable_interrupts(GLOBAL); 
+0C7A:  BCF    FF2.6
+0C7C:  BCF    FF2.7
+0C7E:  BTFSC  FF2.7
+0C80:  BRA    0C7C
 ....................       resposta_SIM = 0; 
-0C60:  BCF    x82.1
+0C82:  BCF    x82.1
 ....................       comando = Get_Comando(); 
-0C62:  MOVLB  0
-0C64:  RCALL  075A
-0C66:  MOVFF  01,18D
+0C84:  MOVLB  0
+0C86:  RCALL  075C
+0C88:  MOVFF  01,18D
 ....................       Executa_Comando(comando); 
-0C6A:  MOVFF  18D,1B9
-0C6E:  RCALL  0A02
+0C8C:  MOVFF  18D,1B9
+0C90:  RCALL  0A04
 ....................       delay_ms(100); 
-0C70:  MOVLW  64
-0C72:  MOVLB  2
-0C74:  MOVWF  x46
-0C76:  MOVLB  0
-0C78:  CALL   03D4
+0C92:  MOVLW  64
+0C94:  MOVLB  2
+0C96:  MOVWF  x46
+0C98:  MOVLB  0
+0C9A:  CALL   03D4
 ....................       envia_SIM800L("AT+CMGD=1,1\r\n", "OK"); 
-0C7C:  MOVLW  01
-0C7E:  MOVWF  FEA
-0C80:  MOVLW  A8
-0C82:  MOVWF  FE9
-0C84:  MOVFF  FF2,1B9
-0C88:  BCF    FF2.7
-0C8A:  MOVLW  0E
-0C8C:  MOVWF  01
-0C8E:  CLRF   FF7
-0C90:  MOVLW  00
-0C92:  CALL   028E
-0C96:  TBLRD*-
-0C98:  TBLRD*+
-0C9A:  MOVFF  FF5,FEE
-0C9E:  DECFSZ 01,F
-0CA0:  BRA    0C98
-0CA2:  MOVLB  1
-0CA4:  BTFSC  xB9.7
-0CA6:  BSF    FF2.7
-0CA8:  MOVLW  4F
-0CAA:  MOVWF  xB6
-0CAC:  MOVLW  4B
-0CAE:  MOVWF  xB7
-0CB0:  CLRF   xB8
-0CB2:  MOVLW  01
-0CB4:  MOVLB  2
-0CB6:  MOVWF  x3C
-0CB8:  MOVLW  A8
-0CBA:  MOVWF  x3B
-0CBC:  MOVLW  01
-0CBE:  MOVWF  x3E
-0CC0:  MOVLW  B6
-0CC2:  MOVWF  x3D
-0CC4:  MOVLB  0
-0CC6:  RCALL  052E
-0CC8:  MOVLB  1
+0C9E:  MOVLW  01
+0CA0:  MOVWF  FEA
+0CA2:  MOVLW  A8
+0CA4:  MOVWF  FE9
+0CA6:  MOVFF  FF2,1B9
+0CAA:  BCF    FF2.7
+0CAC:  MOVLW  0E
+0CAE:  MOVWF  01
+0CB0:  CLRF   FF7
+0CB2:  MOVLW  00
+0CB4:  CALL   028E
+0CB8:  TBLRD*-
+0CBA:  TBLRD*+
+0CBC:  MOVFF  FF5,FEE
+0CC0:  DECFSZ 01,F
+0CC2:  BRA    0CBA
+0CC4:  MOVLB  1
+0CC6:  BTFSC  xB9.7
+0CC8:  BSF    FF2.7
+0CCA:  MOVLW  4F
+0CCC:  MOVWF  xB6
+0CCE:  MOVLW  4B
+0CD0:  MOVWF  xB7
+0CD2:  CLRF   xB8
+0CD4:  MOVLW  01
+0CD6:  MOVLB  2
+0CD8:  MOVWF  x3C
+0CDA:  MOVLW  A8
+0CDC:  MOVWF  x3B
+0CDE:  MOVLW  01
+0CE0:  MOVWF  x3E
+0CE2:  MOVLW  B6
+0CE4:  MOVWF  x3D
+0CE6:  MOVLB  0
+0CE8:  RCALL  052E
+0CEA:  MOVLB  1
 ....................     } 
 ....................     comando = 0; 
-0CCA:  CLRF   x8D
+0CEC:  CLRF   x8D
 ....................     clear_command(); 
-0CCC:  MOVLB  0
-0CCE:  BRA    0C08
-0CD0:  MOVLB  1
+0CEE:  MOVLB  0
+0CF0:  BRA    0C12
+0CF2:  MOVLB  1
 ....................   } 
 ....................    
 ....................   return; 
-0CD2:  MOVLB  0
-0CD4:  GOTO   0E0E (RETURN)
+0CF4:  MOVLB  0
+0CF6:  GOTO   0E32 (RETURN)
 .................... } 
 ....................  
 .................... void Executar_Cada_Minuto(){ 
@@ -4029,7 +4049,7 @@ CCS PCH C Compiler, Version 5.015, 5967               15-out-18 17:11
 ....................  
 ....................   return; 
 *
-0004:  GOTO   0E1C (RETURN)
+0004:  GOTO   0E40 (RETURN)
 .................... } 
 
 Configuration Fuses:

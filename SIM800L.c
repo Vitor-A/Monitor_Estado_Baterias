@@ -24,7 +24,7 @@ int1 envia_SIM800L(char *send, char *recive){
     while(!comando_disponivel_UART && --timeout > 0);                         // Aguarda o SIM800L responder por ~23 segundos caso nao responda retorna 0
                          
     if(comando_disponivel_UART){                                              // Caso receba a resposta 
-                       
+      comando_disponivel_UART = 0;                  
       posicao_valor_comando = strstr(comando_recibido_UART,recive);           // Procura a palavra recive da funcao na resposta recebida
                 
       if(posicao_valor_comando!= 0){                                          // Caso encontre a resposta esperada
