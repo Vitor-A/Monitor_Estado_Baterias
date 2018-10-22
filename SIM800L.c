@@ -1,8 +1,10 @@
 #include"Serial.h"
+#include <string.h>
 
 extern int1 resposta_SIM;
 extern comando_disponivel_UART;
 int32 timeout = 7000000;
+char coordenada[40];
 
 int1 envia_SIM800L(char *send, char *recive){
 
@@ -66,4 +68,64 @@ int1 Read_SMS(){
     }  
   }
   return 0;
+}
+
+int1 Get_Locate(char *numero){
+  
+  if(envia_SIM800L("AT+CMGF=1\r\n","OK"))
+    if(envia_SIM800L("AT+CGATT=1\r\n","OK"))
+      if(envia_SIM800L("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"\r\n","OK"))
+        if(envia_SIM800L("AT+SAPBR=3,1,\"APN\",\"CMNET\"\r\n","OK"))
+          if(envia_SIM800L("AT+SAPBR=1,1\r\n","OK"))
+            if(envia_SIM800L("AT+SAPBR=2,1\r\n","+SAPBR:"))
+              if(envia_SIM800L("AT+CLBSCFG=0,1\r\n","+CLBSCFG:")){                
+                if(envia_SIM800L("AT+CLBS=1,1\r\n","+CLBS:")){
+                  Get_Coordenadas();
+                  Send_SMS(numero,coordenada); 
+                  if(envia_SIM800L("AT+SAPBR=0,1\r\n","OK"))
+                    return 1; 
+                }
+              }
+  return 0;   
+}
+
+void Get_Coordenadas(){
+ 
+ int8 index=0;
+ int8 index2=0;
+
+  memset (coordenada, 0x00, sizeof(coordenada));
+  
+  coordenada[0] ='L';
+  coordenada[1] ='O';
+  coordenada[2] ='C';
+  coordenada[3] ='A';
+  coordenada[4] ='T';
+  coordenada[5] ='E';
+  coordenada[6] =':';
+  coordenada[7] =' ';
+ 
+  index2 = 8;
+  for(index=22;index<33;index++){ //Latitude
+   coordenada[index2] = comando_recibido_UART[index];
+   index2++;   
+  }
+
+  for(index=11;index<20;index++){ //Longitude
+   coordenada[index2] = comando_recibido_UART[index];
+   index2++;   
+  }
+  
+  coordenada[index2++] =' ';
+  coordenada[index2++] ='R';
+  coordenada[index2++] ='=';
+
+  for(index=33;index<36;index++){ //Precisão
+   coordenada[index2] = comando_recibido_UART[index];
+   index2++;   
+  }
+  
+  coordenada[index2++] ='m';
+  coordenada[index2] = 0;
+
 }

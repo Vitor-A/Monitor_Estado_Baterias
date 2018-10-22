@@ -91,6 +91,14 @@ void Executa_Comando(char comando){
         Send_SMS(numero,"OK CLEAR ALL");
         break;
       }
+
+      strcpy (CMD, "+GSMLOCATE");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); //+GSMLOCATE
+      if(posicao_valor_comando!= 0){
+         
+        get_numero(14,25,numero); 
+        Get_Locate(numero); 
+        break;
+      }
          
     break;
 
