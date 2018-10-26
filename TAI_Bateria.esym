@@ -1,7 +1,7 @@
 D G "__PCH__" 0 0 ""5.015""
 D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""21-out-18""
-D G "__TIME__" 0 0 ""23:43:48"" "Projeto Monitor do Estado de Baterias - TAI"
+D G "__DATE__" 0 0 ""26-out-18""
+D G "__TIME__" 0 0 ""21:41:07"" "Projeto Monitor do Estado de Baterias - TAI"
 C G "" 0 5 6 "*"
 c L "set_tris_a" 1 1 6 "FUNCTION"
 v L "value" 1 45 "int8" `54 
@@ -1413,22 +1413,22 @@ V L "numero_envio" 8 50 "int8[35]" `993
 F G "Read_SMS" 8 62 "int8()" `932 
 V L "numero" 8 73 "*int8" `1014 
 F G "Get_Locate" 8 73 "int8(*int8 numero)" `933 
-F G "Get_Coordenadas" 8 92 "void()" `935 
-V L "index" 8 94 "int8" `1032 
-V L "index2" 8 95 "int8" `1033 
+F G "Get_Coordenadas" 8 94 "void()" `935 
+V L "index" 8 96 "int8" `1034 
+V L "index2" 8 97 "int8" `1035 
 C L "Get_Coordenadas" 8 21 1 "FUNCTION"
 C L "Get_Coordenadas" 8 21 1 "FUNCTION"
 C L "Get_Coordenadas" 8 21 1 "FUNCTION"
 V G "comando_disponivel_UART" 0 30 "int1" `964 
-V G "One_Second" 0 31 "int1" `1034 
-V G "One_Minute" 0 32 "int1" `1035 
-V G "Miliseconds" 0 33 "int16" `1036 
-V G "seconds" 0 34 "int16" `1037 
-V G "comando" 0 35 "int8" `1038 
+V G "One_Second" 0 31 "int1" `1036 
+V G "One_Minute" 0 32 "int1" `1037 
+V G "Miliseconds" 0 33 "int16" `1038 
+V G "seconds" 0 34 "int16" `1039 
+V G "comando" 0 35 "int8" `1040 
 V G "resposta_SIM" 0 36 "int1" `986 
 C L "Timer_0" 0 28 1 "FUNCTION"
-F G "Timer_0" 0 40 "void()" `1039 
-F G "MAIN" 0 59 "void()" `1040 
+F G "Timer_0" 0 40 "void()" `1041 
+F G "MAIN" 0 59 "void()" `1042 
 C L "MAIN" 0 28 1 "FUNCTION"
 C L "MAIN" 0 28 1 "FUNCTION"
 C L "MAIN" 0 28 1 "FUNCTION"

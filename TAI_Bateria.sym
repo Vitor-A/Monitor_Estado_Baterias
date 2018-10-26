@@ -65,10 +65,10 @@
 1F1     Get_Comando.@SCRATCH2
 205-210 Executa_Comando.@STRPARAM
 211-21D Executa_Comando.@STRPARAM
-21E-21F insere_numero.numero
 21E-21F Get_Locate.numero
-21E-235 Read_SMS.@STRPARAM
+21E-21F insere_numero.numero
 21E     get_numero.nro_caracteres
+21E-235 Read_SMS.@STRPARAM
 21E     Executa_Comando.@SCRATCH1
 21F     get_numero.posicao
 21F     Executa_Comando.@SCRATCH2
@@ -141,21 +141,21 @@
 F83     PSP_DATA
 FB4.6   C1OUT
 FB4.7   C2OUT
-FBB     CCP_2_LOW
 FBB     CCP_2
+FBB     CCP_2_LOW
 FBC     CCP_2_HIGH
 FBE     CCP_1
 FBE     CCP_1_LOW
 FBF     CCP_1_HIGH
 FE1-FE2 @WRITE_PACKED_MEMORY.P1
 FE1-FE2 @READ_PACKED_MEMORY.P2
-FE9-FEA @READ_PACKED_MEMORY.P1
-FE9-FEA @MEMSET.P2
-FE9-FEA @WRITE_PROGRAM_MEMORY.P3
-FE9-FEA @WRITE_PACKED_MEMORY.P4
-FE9-FEA @READ_PROGRAM_MEMORY.P5
-FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
-FF6-FF8 @READ_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @MEMSET.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FE9-FEA @READ_PACKED_MEMORY.P5
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
 
 ROM Allocation:
 000004  Executar_Cada_Minuto
@@ -182,9 +182,9 @@ ROM Allocation:
 0003C4  @const1028.call
 0003EC  @const1029.call
 00040E  @const1030.call
-000438  @const1043.call
-000460  @const1045.call
-000488  @const1046.call
+000438  @const1045.call
+000460  @const1047.call
+000488  @const1048.call
 0004B0  @GETCH_BIU_1
 0004C6  recepcao_UART
 00057E  @const994.call
@@ -206,12 +206,12 @@ ROM Allocation:
 000BF0  limpa_numeros
 000C06  Get_Coordenadas
 000D68  Get_Locate
-0010CC  Executa_Comando
-00135C  clear_command
-00139A  Executar_Cada_Segundo
-00144A  @cinit1
-00144A  MAIN
-0014A4  @cinit2
+001118  Executa_Comando
+0013AA  clear_command
+0013E8  Executar_Cada_Segundo
+001498  MAIN
+001498  @cinit1
+0014F2  @cinit2
 0136  StrtoulGO
 0136  StrtolGO
 
@@ -219,7 +219,7 @@ Project Directory:
     C:\Users\Vitor\Desktop\Monitor_Estado_Baterias\
 
 Project Files:
-    TAI_Bateria.c                                           [21-out-18 11:32  CRC=97EE9A87]
+    TAI_Bateria.c                                           [26-out-18 21:41  CRC=4D7DDD44]
     ..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h  [12-nov-13 15:35  CRC=5337E248]
     ..\..\..\..\Program Files (x86)\PICC\drivers\stdlib.h   [08-jun-11 15:39  CRC=0B6669CF]
     ..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h   [16-jul-10 10:27  CRC=897CEC6C]
@@ -227,13 +227,13 @@ Project Files:
     ..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h    [03-jan-08 14:55  CRC=2D1F019F]
     TAI_Bateria.h                                           [14-out-18 17:16  CRC=D872A938]
     SIM800L.h                                               [21-out-18 23:39  CRC=D872A938]
-    SIM800L.c                                               [21-out-18 23:39  CRC=A1528886]
+    SIM800L.c                                               [26-out-18 21:19  CRC=34D6DB55]
     Serial.h                                                [15-out-18 17:37  CRC=B446CDDE]
     Serial.c                                                [21-out-18 23:43  CRC=847B36A1]
     numeros.h                                               [14-out-18 17:16  CRC=00000000]
     numeros.c                                               [14-out-18 17:16  CRC=44CB0958]
 
-Source signature=E5A6B35D
+Source signature=2EBA48E9
 
 Units:
     TAI_Bateria (main)

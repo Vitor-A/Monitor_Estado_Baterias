@@ -86,6 +86,8 @@ int1 Get_Locate(char *numero){
                     return 1; 
                 }
               }
+ 
+  envia_SIM800L("AT+SAPBR=0,1\r\n","OK");
   return 0;   
 }
 
@@ -111,7 +113,7 @@ void Get_Coordenadas(){
    index2++;   
   }
 
-  for(index=11;index<20;index++){ //Longitude
+  for(index=11;index<22;index++){ //Longitude
    coordenada[index2] = comando_recibido_UART[index];
    index2++;   
   }
@@ -120,7 +122,7 @@ void Get_Coordenadas(){
   coordenada[index2++] ='R';
   coordenada[index2++] ='=';
 
-  for(index=33;index<36;index++){ //Precisão
+  for(index=33;index<35;index++){ //Precisão
    coordenada[index2] = comando_recibido_UART[index];
    index2++;   
   }

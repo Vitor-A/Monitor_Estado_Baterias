@@ -7,7 +7,7 @@
 //  Cristal externo = 16 MHz - Uso de PLL*4 -> Frequencia de trabalho = 16MHz 
 //  Prescaler = 1:16
 //  Tout =(4*prescaler* (256-TMR0))/fclk  
-//  Para interrupÃ§Ã£o a cada 1 ms
+//  Para interrupção a cada 1 ms
 //  TMR0 = 6 
 // 
 //****************************************************************************

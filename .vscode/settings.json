@@ -23,10 +23,11 @@
       "**/*.tre": true,
       "**/*.STA": true
    },
-   "files.associations": {
-      "fota2eeprom.h": "c",
-      "comands.h": "c",
-      "tai_bateria.h": "c",
-      "serial.h": "c"
-   }
+  "files.associations": {
+    "fota2eeprom.h": "c",
+    "comands.h": "c",
+    "tai_bateria.h": "c",
+    "serial.h": "c",
+    "18f4550.h": "c"
+  }
 }
