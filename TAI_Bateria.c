@@ -15,11 +15,12 @@
 #include <18F4550.h>
 
 #fuses NOWDT,NOPROTECT,NOLVP,MCLR,HSPLL,PLL4
-#device PASS_STRINGS=IN_RAM
+#device PASS_STRINGS=IN_RAM,adc=10
 #use delay(clock=16000000)
 #use rs232(uart1,baud=115200, xmit=PIN_C6, rcv=PIN_C7, stream = SIM800L_SERIAL, ERRORS)
+#use rs232(baud=9600, xmit=PIN_B2, rcv=PIN_B3, stream = MONITOR_SERIAL)
 #use fast_io (ALL)
-#priority rda, rtcc,
+#priority ext,rda, rtcc,
 
 #include <stdlib.h>
 #include "TAI_Bateria.h"
@@ -34,49 +35,92 @@ int16 Miliseconds = 0;
 int16 seconds = 0;
 char comando = 0;
 int1 resposta_SIM = false;
+int8 leitura_tensao[500];
+int16 leitura_corrente[100];
+int1 partida_iniciada = FALSE;
+int1 aquisicao_tensao_partida = FALSE;
+int1 veiculo_ligado = FALSE;
+int16 index = 0;
+int8 V1 = 255;
+int8 V2 = 255;
 //Fim declaração de variáveis
 
 #INT_RTCC
 void Timer_0(){
 
   set_timer0(6);  
-  Miliseconds++;
+  
+  if(partida_iniciada){
+    
+    if(index<500){ 
 
-  if(Miliseconds == 1000){
-    seconds++;
-    Miliseconds = 0;
-    One_Second = TRUE;
-    output_toggle(PIN_A1);
-    if(seconds==60){
-      seconds = 0;
-      One_Minute = TRUE;
+      leitura_tensao[index] = (read_adc()>>2);
+      output_toggle(PIN_A0);
+      index++;
+    } 
+    else{
+      partida_iniciada = FALSE;
+      aquisicao_tensao_partida = TRUE;
+      enable_interrupts(INT_RDA);
+      enable_interrupts(INT_EXT);
+    }
+  }
+  else{
+    Miliseconds++;
+    
+    if(Miliseconds == 1000){
+      seconds++;
+      Miliseconds = 0;
+      One_Second = TRUE;
+      output_toggle(PIN_A0);
+      if(seconds==60){
+        seconds = 0;
+        One_Minute = TRUE;
+      }
     }
   }
   return;
 }
 
+#INT_EXT
+void Interrupcao_Externa(){
+  
+  set_adc_channel(1);
+  disable_interrupts(INT_RDA);
+  disable_interrupts(INT_EXT);
+  partida_iniciada = TRUE;
+  veiculo_ligado = TRUE;
+  aquisicao_tensao_partida = FALSE;
+  index = 0;
+
+  return;
+}
+
 void main()
 {
-  set_tris_a (0b00000000);                                                     //Ra7-Ra6-Ra5-Ra4-Ra3-Ra2-Ra1-Ra0
-  set_tris_b (0b00000000);                                                     //Rb7-Rb6-Rb5-Rb4-Rb3-Rb2-Rb1-Rb0
+  set_tris_a (0b00001110);                                                     //Ra7-Ra6-Ra5-Ra4-Ra3-Ra2-Ra1-Ra0
+  set_tris_b (0b00001001);                                                     //Rb7-Rb6-Rb5-Rb4-Rb3-Rb2-Rb1-Rb0
   set_tris_c (0b10000000);                                                     //Rc7-Rc6-Rc5-Rc4-Rc3-Rc2-Rc1-Rc0
   set_tris_d (0b00000000); 
   
-  setup_adc_ports(NO_ANALOGS);
-  setup_adc(ADC_OFF);
+  setup_adc_ports(AN0_TO_AN3);
+  setup_adc(ADC_CLOCK_DIV_2);
+  set_adc_channel(1);
   setup_wdt(WDT_OFF);
   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_16 | RTCC_8_BIT);
   set_timer0(6);
+  ext_int_edge(H_TO_L);
   
-  enable_interrupts(INT_TIMER0);
+  enable_interrupts(INT_RTCC);
   enable_interrupts(INT_RDA);
+  enable_interrupts(INT_EXT_H2L);
   enable_interrupts(GLOBAL); 
-  output_high(PIN_C5);
+  output_low(PIN_D2);
   delay_ms(2000);
-  output_low(PIN_C5);
-  delay_ms(5000);
+  output_high(PIN_D2);
+  delay_ms(15000);
   Send_SMS("031995822739","INICIANDO...");
-  
+
   while(TRUE){
 
     if(One_Second){
@@ -98,7 +142,13 @@ void main()
 }
 
 void Executar_Cada_Segundo(){
+  
+  if(aquisicao_tensao_partida){
 
+    aquisicao_tensao_partida = FALSE;
+    Obtem_SOH();
+
+  }
   if(comando_disponivel_UART){
   
     disable_interrupts(GLOBAL);
@@ -125,7 +175,24 @@ void Executar_Cada_Segundo(){
 }
 
 void Executar_Cada_Minuto(){
-  //Send_SMS("031995822739","TESTE");
+  
+
+  return;
+}
+
+void Obtem_SOH(){
+ 
+  V1 = 255;
+  V2 = 255;
+  index = 0;
+
+  for(index=0;index<15;index++){
+    
+    if(leitura_tensao[index]<V1)
+      V1 = leitura_tensao[index];
+   
+  }
+  
 
   return;
 }

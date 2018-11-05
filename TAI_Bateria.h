@@ -5,5 +5,6 @@
 
 void Executar_Cada_Segundo();
 void Executar_Cada_Minuto();
+void Obtem_SOH();
 
 #ENDIF

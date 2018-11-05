@@ -1,3 +1,4 @@
-      Memory usage:   ROM=17%      RAM=22% - 33%
-      0 Errors,  0 Warnings.
+C:\Users\Vitor\Desktop\Monitor_Estado_Baterias\TAI_Bateria.c:39:7:  Warning#202  Variable never used:   leitura_corrente
+      Memory usage:   ROM=18%      RAM=56% - 67%
+      0 Errors,  1 Warnings.
 Build Successful.

@@ -122,7 +122,7 @@ void Get_Coordenadas(){
   coordenada[index2++] ='R';
   coordenada[index2++] ='=';
 
-  for(index=33;index<35;index++){ //Precisão
+  for(index=33;index<36;index++){ //Precisão
    coordenada[index2] = comando_recibido_UART[index];
    index2++;   
   }
