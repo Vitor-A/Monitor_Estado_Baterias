@@ -9,6 +9,12 @@ char comando_recibido_BUFF [UART_BUFFER_SIZE];
 int *posicao_valor_comando = 0;
 int16 timeout_trama_UART = 100000;
 extern int1 comando_disponivel_UART;
+extern int32 corrente_limite;
+extern int32 tempo_entre_alertas;
+extern float aux_corrente;
+extern float aux_tensao;
+extern float zero_set;
+extern float zero_set_aux;
 
 #INT_RDA 
 void recepcao_UART()
@@ -55,6 +61,7 @@ void Executa_Comando(char comando){
 
   char CMD[15];
   char numero[20];
+
   disable_interrupts(GLOBAL);
   
   switch(comando){
@@ -97,6 +104,52 @@ void Executa_Comando(char comando){
          
         get_numero(14,25,numero); 
         Get_Locate(numero); 
+        break;
+      }
+
+      strcpy (CMD, "+CURLIM");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); //rn+CMGL: 1,"REC UNREAD","+5531995822739","","18/11/10,18:12:21-08"rn+CURLIM000001rn
+
+      if(posicao_valor_comando!= 0){
+         
+        get_numero(14,25,numero);
+        corrente_limite = get_value(posicao_valor_comando,6,7); //+CURALM001<CR><LF>
+        memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF));
+        sprintf(comando_recibido_BUFF, "Corrente Limite = %Lu mA",corrente_limite);
+        Send_SMS(numero,comando_recibido_BUFF);
+        break;
+      }
+
+      strcpy (CMD, "+CURALM");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); //rn+CMGL: 1,"REC UNREAD","+5531995822739","","18/11/10,18:09:52-08"rn+CURALM001rn
+      if(posicao_valor_comando!= 0){
+         
+        get_numero(14,25,numero);
+        tempo_entre_alertas = get_value(posicao_valor_comando,3,7); //+CURLIM000001<CR><LF>
+        memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF));
+        sprintf(comando_recibido_BUFF, "Tempo Entre Alertas = %Lu min",tempo_entre_alertas);
+        Send_SMS(numero,comando_recibido_BUFF);
+        break;
+      }
+
+      strcpy (CMD, "+CSTATS");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); //+CSTATS
+      if(posicao_valor_comando!= 0){
+         
+        get_numero(14,25,numero);
+        memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF));
+        sprintf(comando_recibido_BUFF, "Tempo Entre Alertas = %Lu min / Corrente Limite = %Lu mA / Corrente Atual: %6.0f mA / Tensao Atual: %2.2f V",tempo_entre_alertas,corrente_limite,aux_corrente,aux_tensao);
+        Send_SMS(numero,comando_recibido_BUFF);
+        if(qtd_numeros>0) Send_SMS(numero,numeros);
+
+        break;
+      }
+
+      strcpy (CMD, "+SETZERO");posicao_valor_comando = strstr(comando_recibido_BUFF,CMD); //+SETZERO
+      if(posicao_valor_comando!= 0){
+         
+        get_numero(14,25,numero);
+        zero_set = zero_set_aux;
+        Send_SMS(numero,"ZERO SETED");
+        if(qtd_numeros>0) Send_SMS(numero,numeros);
+
         break;
       }
          

@@ -1,5 +1,5 @@
 char numeros[50];
-int8 qtd_numeros=0;
+extern int8 qtd_numeros;
 char *posicao_numero;
 
 int1 insere_numero(char *numero){ // >+5531995822739>+5531995822739>+5531995822739
@@ -33,6 +33,22 @@ int1 insere_numero(char *numero){ // >+5531995822739>+5531995822739>+55319958227
   return 0;
 }
 
+void obtem_numero(int8 pos_num, char *numero){
+
+  int8 index = 0;
+  int8 index_2 = 0;
+
+  if(pos_num>qtd_numeros) return;
+
+  for(index = ((pos_num*15)+1); index<(pos_num+1)*15;index++){
+
+    numero[index_2] = numeros[index];
+    index_2++;
+  }  
+  
+  return;
+
+}
 
 void limpa_numeros(){
 

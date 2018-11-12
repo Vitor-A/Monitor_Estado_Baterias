@@ -7,7 +7,7 @@
 //  Cristal externo = 16 MHz - Uso de PLL*4 -> Frequencia de trabalho = 16MHz 
 //  Prescaler = 1:16
 //  Tout =(4*prescaler* (256-TMR0))/fclk  
-//  Para interrupção a cada 1 ms
+//  Para interrupï¿½ï¿½o a cada 1 ms
 //  TMR0 = 6 
 // 
 //****************************************************************************
@@ -35,14 +35,32 @@ int16 Miliseconds = 0;
 int16 seconds = 0;
 char comando = 0;
 int1 resposta_SIM = false;
-int8 leitura_tensao[500];
-int16 leitura_corrente[100];
+int8 leitura_tensao_partida[400];
 int1 partida_iniciada = FALSE;
 int1 aquisicao_tensao_partida = FALSE;
 int1 veiculo_ligado = FALSE;
 int16 index = 0;
+unsigned int8 index_1 = 0;
+unsigned int8 index_2 = 0;
 int8 V1 = 255;
 int8 V2 = 255;
+int1 sel_ad = FALSE;
+unsigned int16 leitura_corrente[100];
+unsigned int16 offset_current_ref[100];
+unsigned int8 leitura_tensao[100];
+unsigned int16 aux_leitura[100];
+float aux_offset_current_ref = 0;
+float aux_corrente = 0;
+float aux_tensao = 0;
+float zero_set = 0;
+float zero_set_aux = 0;
+int32 corrente_limite = 3000;
+int8 qtd_numeros=0;
+int8 tempo_corrente_verif = 0; 
+int8 index_envio = 0;
+int32 tempo_entre_alertas = 1;
+int32 tempo_ultimo_alerta = 1;
+char numero[20];
 //Fim declaraÃ§Ã£o de variÃ¡veis
 
 #INT_RTCC
@@ -52,13 +70,14 @@ void Timer_0(){
   
   if(partida_iniciada){
     
-    if(index<500){ 
+    if(index<400){ 
 
-      leitura_tensao[index] = (read_adc()>>2);
+      leitura_tensao_partida[index] = (read_adc()>>2);
       output_toggle(PIN_A0);
       index++;
     } 
     else{
+      index = 0;
       partida_iniciada = FALSE;
       aquisicao_tensao_partida = TRUE;
       enable_interrupts(INT_RDA);
@@ -67,11 +86,31 @@ void Timer_0(){
   }
   else{
     Miliseconds++;
-    
+
+    if(Miliseconds % 5 == 0){
+      sel_ad = !sel_ad;
+   
+      if(sel_ad){
+        leitura_corrente[index_1] = read_adc();
+        set_adc_channel(3);
+        delay_us(10);
+        offset_current_ref[index_1] = read_adc();
+        set_adc_channel(1);
+        index_1++;
+      }
+      else{
+        leitura_tensao[index_2] = (read_adc()>>2);
+        set_adc_channel(2);
+        index_2++;
+      } 
+    }
+
     if(Miliseconds == 1000){
       seconds++;
       Miliseconds = 0;
       One_Second = TRUE;
+      index_1 = 0;
+      index_2 = 0;
       output_toggle(PIN_A0);
       if(seconds==60){
         seconds = 0;
@@ -113,13 +152,14 @@ void main()
   
   enable_interrupts(INT_RTCC);
   enable_interrupts(INT_RDA);
-  enable_interrupts(INT_EXT_H2L);
   enable_interrupts(GLOBAL); 
   output_low(PIN_D2);
   delay_ms(2000);
   output_high(PIN_D2);
   delay_ms(15000);
   Send_SMS("031995822739","INICIANDO...");
+  enable_interrupts(INT_EXT_H2L);
+  clear_interrupt(INT_EXT);
 
   while(TRUE){
 
@@ -142,6 +182,8 @@ void main()
 }
 
 void Executar_Cada_Segundo(){
+  
+  Calcula_SOC();
   
   if(aquisicao_tensao_partida){
 
@@ -176,7 +218,29 @@ void Executar_Cada_Segundo(){
 
 void Executar_Cada_Minuto(){
   
+  index_envio = 0;
+  if(aux_corrente > corrente_limite){
+    ++tempo_corrente_verif;
+    if(tempo_corrente_verif>1 && qtd_numeros>0 && tempo_entre_alertas>0){
+      tempo_ultimo_alerta++;
 
+      disable_interrupts(INT_EXT); 
+      
+      if(tempo_ultimo_alerta >= tempo_entre_alertas){   
+        tempo_ultimo_alerta = 0;
+        tempo_corrente_verif = 0;  
+        
+        for(index_envio = 0; index_envio < qtd_numeros; index_envio++){
+          memset (numero, 0x00, sizeof(numero));
+          obtem_numero(index_envio,numero);
+          Send_SMS(numero,"!!!ALERTA: Bateria em descarga rapida VERIFIQUE SEU VEICULO!!!");
+  
+        }
+      }
+      enable_interrupts(INT_EXT);
+    }
+      
+  }  
   return;
 }
 
@@ -188,11 +252,58 @@ void Obtem_SOH(){
 
   for(index=0;index<15;index++){
     
-    if(leitura_tensao[index]<V1)
+    if(leitura_tensao_partida[index]<V1)
       V1 = leitura_tensao[index];
    
   }
   
 
   return;
+}
+
+void Calcula_SOC(){
+  
+  int8 i=0;
+  char exibe[50];
+
+  for(i=0; i<100;i++)
+    aux_leitura[i] = leitura_corrente[i];
+  aux_corrente = obtem_mediana(aux_leitura,100);
+  
+  for(i=0; i<100;i++)
+    aux_leitura[i] = offset_current_ref[i];
+  aux_offset_current_ref = obtem_mediana(aux_leitura,100);
+
+  for(i=0; i<100;i++)
+    aux_leitura[i] = leitura_tensao[i];
+  aux_tensao = obtem_mediana(aux_leitura,100);
+  
+  aux_tensao = aux_tensao*(15.0/255.0);
+  zero_set_aux = (aux_corrente-(aux_offset_current_ref));
+  aux_corrente = (zero_set_aux-zero_set)*355;
+  if(aux_corrente > -750 && aux_corrente < 750) aux_corrente = 0;
+
+  disable_interrupts(GLOBAL);
+  sprintf(exibe,"Corrente: %6.0f Tensao: %2.2f \r\n",aux_corrente,aux_tensao);
+  fprintf(MONITOR_SERIAL,exibe);
+  enable_interrupts(GLOBAL);
+
+}
+
+unsigned int16 obtem_mediana(unsigned int16 *num, int8 tam){  
+
+  int16 aux; 
+  int16 i, j;
+
+  for (i = 0; i < (tam-1); i++){
+    for (j = i+1; j < tam; j++){
+      if (num[i] < num[j])
+      {
+        aux = num[i];
+        num[i] = num[j];
+        num[j] = aux;
+      }
+    }
+  }
+  return num[50]; 
 }
