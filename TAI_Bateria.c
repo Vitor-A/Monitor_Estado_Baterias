@@ -25,6 +25,8 @@
 #include <stdlib.h>
 #include "TAI_Bateria.h"
 #include "SIM800L.h"
+#include "Memory.h"
+#include "numeros.h"
 
 // Declaração de Variáveis
 
@@ -56,10 +58,12 @@ float zero_set = 0;
 float zero_set_aux = 0;
 int32 corrente_limite = 3000;
 int8 qtd_numeros=0;
-int8 tempo_corrente_verif = 0; 
+int8 tempo_corrente_verif = 0;
+int8 tempo_corrente_verif_low = 0; 
 int8 index_envio = 0;
 int32 tempo_entre_alertas = 1;
 int32 tempo_ultimo_alerta = 1;
+int1 detect_high_current = false;
 char numero[20];
 //Fim declaração de variáveis
 
@@ -70,16 +74,17 @@ void Timer_0(){
   
   if(partida_iniciada){
     
+    output_high(PIN_D0);
     if(index<400){ 
-
+        
       leitura_tensao_partida[index] = (read_adc()>>2);
-      output_toggle(PIN_A0);
       index++;
     } 
     else{
       index = 0;
       partida_iniciada = FALSE;
       aquisicao_tensao_partida = TRUE;
+      output_low(PIN_D0);
       enable_interrupts(INT_RDA);
       enable_interrupts(INT_EXT);
     }
@@ -149,17 +154,20 @@ void main()
   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_16 | RTCC_8_BIT);
   set_timer0(6);
   ext_int_edge(H_TO_L);
-  
+
+  output_low(PIN_D0);
   enable_interrupts(INT_RTCC);
   enable_interrupts(INT_RDA);
-  enable_interrupts(GLOBAL); 
+  enable_interrupts(GLOBAL);
+
+  le_EEPROM(); 
   output_low(PIN_D2);
   delay_ms(2000);
   output_high(PIN_D2);
   delay_ms(15000);
   Send_SMS("031995822739","INICIANDO...");
+
   enable_interrupts(INT_EXT_H2L);
-  clear_interrupt(INT_EXT);
 
   while(TRUE){
 
@@ -181,10 +189,44 @@ void main()
 
 }
 
+void le_EEPROM(void){
+
+  read_config(ADDR_tempo_entre_alertas,&tempo_entre_alertas,4);
+  read_config(ADDR_tempo_ultimo_alerta,&tempo_ultimo_alerta,4);
+  read_config(ADDR_corrente_limite,&corrente_limite,4);
+  read_config(ADDR_zero_set,&zero_set,4);
+  read_config(ADDR_qtd_numeros,&qtd_numeros,1);
+  read_config(ADDR_vector_numeros,&numeros,50);
+
+}
+
 void Executar_Cada_Segundo(){
   
   Calcula_SOC();
-  
+  if(aux_corrente > corrente_limite){
+    tempo_corrente_verif++;
+    if(tempo_corrente_verif > 30){
+      tempo_corrente_verif = 0;
+      tempo_corrente_verif_low = 0;
+      detect_high_current = true;
+      disable_interrupts(GLOBAL);
+      fprintf(MONITOR_SERIAL,"Detect High Current\r\n");
+      enable_interrupts(GLOBAL);
+    }
+  }
+  else{
+    tempo_corrente_verif_low++;
+    if(tempo_corrente_verif_low > 30){
+      tempo_corrente_verif_low = 0;
+      tempo_corrente_verif = 0;
+      detect_high_current = false;
+      disable_interrupts(GLOBAL);
+      fprintf(MONITOR_SERIAL,"Detect Low Current\r\n");
+      enable_interrupts(GLOBAL);
+    }
+    
+  }
+
   if(aquisicao_tensao_partida){
 
     aquisicao_tensao_partida = FALSE;
@@ -219,21 +261,24 @@ void Executar_Cada_Segundo(){
 void Executar_Cada_Minuto(){
   
   index_envio = 0;
-  if(aux_corrente > corrente_limite){
-    ++tempo_corrente_verif;
-    if(tempo_corrente_verif>1 && qtd_numeros>0 && tempo_entre_alertas>0){
+  if(detect_high_current){
+    
+    if((qtd_numeros>0 && qtd_numeros<4) && tempo_entre_alertas>0){
       tempo_ultimo_alerta++;
-
+      disable_interrupts(GLOBAL);
+      fprintf(MONITOR_SERIAL,"Tempo Entre Alertas %Lu , Tempo Ultimoi Alerta %Lu \r\n",tempo_entre_alertas,tempo_ultimo_alerta);
+      enable_interrupts(GLOBAL);
       disable_interrupts(INT_EXT); 
-      
+
       if(tempo_ultimo_alerta >= tempo_entre_alertas){   
         tempo_ultimo_alerta = 0;
-        tempo_corrente_verif = 0;  
-        
         for(index_envio = 0; index_envio < qtd_numeros; index_envio++){
           memset (numero, 0x00, sizeof(numero));
           obtem_numero(index_envio,numero);
-          Send_SMS(numero,"!!!ALERTA: Bateria em descarga rapida VERIFIQUE SEU VEICULO!!!");
+          disable_interrupts(GLOBAL);
+          fprintf(MONITOR_SERIAL,"Send SMS Numero (%u/%u): %s\r\n",index_envio+1,qtd_numeros,numero);
+          enable_interrupts(GLOBAL);
+          Send_SMS(numero,"!!!!ALERTA: Bateria em descarga rapida VERIFIQUE SEU VEICULO!!!");
   
         }
       }

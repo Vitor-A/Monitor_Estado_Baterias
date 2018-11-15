@@ -1,7 +1,7 @@
 D G "__PCH__" 0 0 ""5.015""
 D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""10-nov-18""
-D G "__TIME__" 0 0 ""21:02:47"" "Projeto Monitor do Estado de Baterias - TAI"
+D G "__DATE__" 0 0 ""15-nov-18""
+D G "__TIME__" 0 0 ""19:50:27"" "Projeto Monitor do Estado de Baterias - TAI"
 C G "" 0 5 6 "*"
 c L "set_tris_a" 1 1 6 "FUNCTION"
 v L "value" 1 45 "int8" `54 
@@ -1327,174 +1327,204 @@ V L "tam" 6 8 "int8" `932
 f G "obtem_mediana" 6 8 "int16(*int16 num,int8 tam)" `930 
 f G "Calcula_SOC" 6 9 "void()" `933 
 f G "Obtem_SOH" 6 10 "void()" `934 
+f G "le_EEPROM" 6 11 "void()" `935 
 D G "SIM800L_H" 7 2 ""
-V L "send" 7 4 "*int8" `936 
-V L "recive" 7 4 "*int8" `937 
-f G "envia_SIM800L" 7 4 "int8(*int8 send,*int8 recive)" `935 
-V L "numero" 7 5 "*int8" `939 
-V L "mensagem" 7 5 "*int8" `940 
-f G "Send_SMS" 7 5 "int8(*int8 numero,*int8 mensagem)" `938 
-f G "Read_SMS" 7 6 "int8()" `941 
-V L "numero" 7 7 "*int8" `943 
-f G "Get_Locate" 7 7 "int8(*int8 numero)" `942 
-f G "Get_Coordenadas" 7 8 "void()" `944 
+V L "send" 7 4 "*int8" `937 
+V L "recive" 7 4 "*int8" `938 
+f G "envia_SIM800L" 7 4 "int8(*int8 send,*int8 recive)" `936 
+V L "numero" 7 5 "*int8" `940 
+V L "mensagem" 7 5 "*int8" `941 
+f G "Send_SMS" 7 5 "int8(*int8 numero,*int8 mensagem)" `939 
+f G "Read_SMS" 7 6 "int8()" `942 
+V L "numero" 7 7 "*int8" `944 
+f G "Get_Locate" 7 7 "int8(*int8 numero)" `943 
+f G "Get_Coordenadas" 7 8 "void()" `945 
 D G "SERIAL_H" 9 2 ""
 D G "SMS_COMMAND" 9 4 "1"
 D G "SMS_READ_COMMAND" 9 5 "2"
-V L "comando" 9 7 "int8" `946 
-f G "Executa_Comando" 9 7 "void(int8 comando)" `945 
-f G "Get_Comando" 9 8 "int8()" `947 
-V L "pointer_to_string" 9 9 "*int8" `949 
-V L "nro_caracteres" 9 9 "int8" `950 
-V L "posicao" 9 9 "int8" `951 
-f G "get_value" 9 9 "int32(*int8 pointer_to_string,int8 nro_caracteres,int8 posicao)" `948 
-V L "nro_caracteres" 9 10 "int8" `953 
-V L "posicao" 9 10 "int8" `954 
-V L "destino" 9 10 "*int8" `955 
-f G "get_numero" 9 10 "void(int8 nro_caracteres,int8 posicao,*int8 destino)" `952 
-f G "clear_command" 9 11 "void()" `956 
+V L "comando" 9 7 "int8" `947 
+f G "Executa_Comando" 9 7 "void(int8 comando)" `946 
+f G "Get_Comando" 9 8 "int8()" `948 
+V L "pointer_to_string" 9 9 "*int8" `950 
+V L "nro_caracteres" 9 9 "int8" `951 
+V L "posicao" 9 9 "int8" `952 
+f G "get_value" 9 9 "int32(*int8 pointer_to_string,int8 nro_caracteres,int8 posicao)" `949 
+V L "nro_caracteres" 9 10 "int8" `954 
+V L "posicao" 9 10 "int8" `955 
+V L "destino" 9 10 "*int8" `956 
+f G "get_numero" 9 10 "void(int8 nro_caracteres,int8 posicao,*int8 destino)" `953 
+f G "clear_command" 9 11 "void()" `957 
 D G "NUMEROS_H" 11 2 ""
-V L "numero" 11 4 "*int8" `958 
-f G "insere_numero" 11 4 "int8(*int8 numero)" `957 
-f G "limpa_numeros" 11 5 "void()" `959 
-V L "pos_num" 11 6 "int8" `961 
-V L "numero" 11 6 "*int8" `962 
-f G "obtem_numero" 11 6 "void(int8 pos_num,*int8 numero)" `960 
-V G "numeros" 12 1 "int8[50]" `963 
-V G "qtd_numeros" 12 2 "int8" `964 
-V G "posicao_numero" 12 3 "*int8" `965 
-V L "numero" 12 5 "*int8" `967 
-F G "insere_numero" 12 5 "int8(*int8 numero)" `957  ">+5531995822739>+5531995822739>+5531995822739"
-V L "index" 12 7 "int8" `966 
-V L "index_2" 12 8 "int8" `967 
-V L "pos_num" 12 36 "int8" `961 
-V L "numero" 12 36 "*int8" `970 
-F G "obtem_numero" 12 36 "void(int8 pos_num,*int8 numero)" `960 
-V L "index" 12 38 "int8" `968 
-V L "index_2" 12 39 "int8" `969 
-F G "limpa_numeros" 12 53 "void()" `959 
-D G "UART_BUFFER_SIZE" 10 5 "150"
-V G "comando_recibido_UART" 10 7 "int8[150]" `974 
-V G "comando_recibido_BUFF" 10 8 "int8[150]" `975 
-V G "posicao_valor_comando" 10 9 "*int8" `976 
-V G "timeout_trama_UART" 10 10 "int16" `977 
-V G "comando_disponivel_UART" 10 11 "int1" `978 
-V G "corrente_limite" 10 12 "int32" `979 
-V G "tempo_entre_alertas" 10 13 "int32" `980 
-V G "aux_corrente" 10 14 "float" `981 
-V G "aux_tensao" 10 15 "float" `982 
-V G "zero_set" 10 16 "float" `983 
-V G "zero_set_aux" 10 17 "float" `984 
-F G "recepcao_UART" 10 21 "void()" `985 
-V L "i" 10 22 "int8" `986 
-V L "caracterRx" 10 23 "int8" `987 
-F G "Get_Comando" 10 50 "int8()" `947 
-V L "CMD" 10 51 "int8[15]" `988 
-V L "comando" 10 60 "int8" `992 
-F G "Executa_Comando" 10 60 "void(int8 comando)" `945 
-V L "CMD" 10 62 "int8[15]" `991 
-V L "numero" 10 63 "int8[20]" `992 
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-C L "Executa_Comando" 10 69 1 "FUNCTION"
-V L "pointer_to_string" 10 165 "*int8" `949 
-V L "nro_caracteres" 10 165 "int8" `950 
-V L "posicao" 10 165 "int8" `951  "get_value(posicao_valor_comando,3,6);"
-F G "get_value" 10 166 "int32(*int8 pointer_to_string,int8 nro_caracteres,int8 posicao)" `948 
-V L "valor" 10 167 "int32" `1025 
-V L "i" 10 168 "int8" `1026 
-V L "aux" 10 169 "int32" `1027 
-V L "potencia" 10 170 "int8" `1028 
-V L "nro_caracteres" 10 192 "int8" `953 
-V L "posicao" 10 192 "int8" `954 
-V L "destino" 10 192 "*int8" `1032 
-F G "get_numero" 10 192 "void(int8 nro_caracteres,int8 posicao,*int8 destino)" `952 
-V L "index" 10 194 "int8" `1029 
-F G "clear_command" 10 207 "void()" `956 
-V G "resposta_SIM" 8 4 "int1" `1030 
-V G "timeout" 8 6 "int32" `1031 
-V G "coordenada" 8 7 "int8[40]" `1032 
-V L "send" 8 9 "*int8" `936 
-V L "recive" 8 9 "*int8" `1035 
-F G "envia_SIM800L" 8 9 "int8(*int8 send,*int8 recive)" `935 
-V L "tentativas" 8 11 "int8" `1033 
+V L "numero" 11 4 "*int8" `959 
+f G "insere_numero" 11 4 "int8(*int8 numero)" `958 
+f G "limpa_numeros" 11 5 "void()" `960 
+V L "pos_num" 11 6 "int8" `962 
+V L "numero" 11 6 "*int8" `963 
+f G "obtem_numero" 11 6 "void(int8 pos_num,*int8 numero)" `961 
+V G "numeros" 12 1 "int8[50]" `964 
+V G "qtd_numeros" 12 2 "int8" `965 
+V G "posicao_numero" 12 3 "*int8" `966 
+V L "numero" 12 5 "*int8" `968 
+F G "insere_numero" 12 5 "int8(*int8 numero)" `958  ">+5531995822739>+5531995822739>+5531995822739"
+V L "index" 12 7 "int8" `967 
+V L "index_2" 12 8 "int8" `968 
+V L "pos_num" 12 36 "int8" `962 
+V L "numero" 12 36 "*int8" `971 
+F G "obtem_numero" 12 36 "void(int8 pos_num,*int8 numero)" `961 
+V L "index" 12 38 "int8" `969 
+V L "index_2" 12 39 "int8" `970 
+F G "limpa_numeros" 12 53 "void()" `960 
+D G "MEMORY_H" 13 2 ""
+D G "ADDR_tempo_entre_alertas" 13 6 "getenv("EEPROM_ADDRESS") + 0" "int32"
+D G "ADDR_tempo_ultimo_alerta" 13 7 "getenv("EEPROM_ADDRESS") + 4" "int32"
+D G "ADDR_corrente_limite" 13 8 "getenv("EEPROM_ADDRESS") + 8" "int32"
+D G "ADDR_zero_set" 13 9 "getenv("EEPROM_ADDRESS") + 12" "int32"
+D G "ADDR_qtd_numeros" 13 10 "getenv("EEPROM_ADDRESS") + 16" "int8"
+D G "ADDR_vector_numeros" 13 11 "getenv("EEPROM_ADDRESS") + 17" "Vetor int 8 com 50 posicoes"
+C G "" 13 15 1 "*"
+V L "address" 13 27 "int32" `976 
+V L "dataptr" 13 27 "*int8" `977 
+V L "count" 13 27 "int8" `978 
+f G "read_config" 13 27 "void(int32 address,*int8 dataptr,int8 count)" `975 
+V L "address" 13 28 "int32" `980 
+V L "dataptr" 13 28 "*int8" `981 
+V L "count" 13 28 "int8" `982 
+f G "write_config" 13 28 "void(int32 address,*int8 dataptr,int8 count)" `979 
+V L "address" 14 1 "int32" `980 
+V L "dataptr" 14 1 "*int8" `981 
+V L "count" 14 1 "int8" `986 
+F G "write_config" 14 1 "void(int32 address,*int8 dataptr,int8 count)" `979 
+V L "i" 14 4 "int8" `983 
+V L "address" 14 13 "int32" `976 
+V L "dataptr" 14 13 "*int8" `977 
+V L "count" 14 13 "int8" `987 
+F G "read_config" 14 13 "void(int32 address,*int8 dataptr,int8 count)" `975 
+V L "i" 14 16 "int8" `984 
+D G "UART_BUFFER_SIZE" 10 6 "150"
+V G "comando_recibido_UART" 10 8 "int8[150]" `985 
+V G "comando_recibido_BUFF" 10 9 "int8[150]" `986 
+V G "posicao_valor_comando" 10 10 "*int8" `987 
+V G "timeout_trama_UART" 10 11 "int16" `988 
+V G "comando_disponivel_UART" 10 12 "int1" `989 
+V G "corrente_limite" 10 13 "int32" `990 
+V G "tempo_entre_alertas" 10 14 "int32" `991 
+V G "aux_corrente" 10 15 "float" `992 
+V G "aux_tensao" 10 16 "float" `993 
+V G "zero_set" 10 17 "float" `994 
+V G "zero_set_aux" 10 18 "float" `995 
+F G "recepcao_UART" 10 22 "void()" `996 
+V L "i" 10 23 "int8" `997 
+V L "caracterRx" 10 24 "int8" `998 
+F G "Get_Comando" 10 51 "int8()" `948 
+V L "CMD" 10 52 "int8[15]" `999 
+V L "comando" 10 61 "int8" `1003 
+F G "Executa_Comando" 10 61 "void(int8 comando)" `946 
+V L "CMD" 10 63 "int8[15]" `1002 
+V L "numero" 10 64 "int8[20]" `1003 
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+C L "Executa_Comando" 10 70 1 "FUNCTION"
+V L "pointer_to_string" 10 172 "*int8" `950 
+V L "nro_caracteres" 10 172 "int8" `951 
+V L "posicao" 10 172 "int8" `952  "get_value(posicao_valor_comando,3,6);"
+F G "get_value" 10 173 "int32(*int8 pointer_to_string,int8 nro_caracteres,int8 posicao)" `949 
+V L "valor" 10 174 "int32" `1042 
+V L "i" 10 175 "int8" `1043 
+V L "aux" 10 176 "int32" `1044 
+V L "potencia" 10 177 "int8" `1045 
+V L "nro_caracteres" 10 199 "int8" `954 
+V L "posicao" 10 199 "int8" `955 
+V L "destino" 10 199 "*int8" `1049 
+F G "get_numero" 10 199 "void(int8 nro_caracteres,int8 posicao,*int8 destino)" `953 
+V L "index" 10 201 "int8" `1046 
+F G "clear_command" 10 214 "void()" `957 
+V G "resposta_SIM" 8 4 "int1" `1047 
+V G "timeout" 8 6 "int32" `1048 
+V G "coordenada" 8 7 "int8[40]" `1049 
+V L "send" 8 9 "*int8" `937 
+V L "recive" 8 9 "*int8" `1052 
+F G "envia_SIM800L" 8 9 "int8(*int8 send,*int8 recive)" `936 
+V L "tentativas" 8 11 "int8" `1050 
 C L "envia_SIM800L" 8 21 1 "FUNCTION"
 C L "envia_SIM800L" 8 21 1 "FUNCTION"
 C L "envia_SIM800L" 8 21 1 "FUNCTION"
 C L "envia_SIM800L" 8 21 1 "FUNCTION"
 C L "envia_SIM800L" 8 21 1 "FUNCTION"
-V L "numero" 8 48 "*int8" `939 
-V L "mensagem" 8 48 "*int8" `1039 
-F G "Send_SMS" 8 48 "int8(*int8 numero,*int8 mensagem)" `938 
-V L "numero_envio" 8 50 "int8[35]" `1037 
-F G "Read_SMS" 8 62 "int8()" `941 
-V L "numero" 8 73 "*int8" `1053 
-F G "Get_Locate" 8 73 "int8(*int8 numero)" `942 
-F G "Get_Coordenadas" 8 94 "void()" `944 
-V L "index" 8 96 "int8" `1073 
-V L "index2" 8 97 "int8" `1074 
+V L "numero" 8 48 "*int8" `940 
+V L "mensagem" 8 48 "*int8" `1056 
+F G "Send_SMS" 8 48 "int8(*int8 numero,*int8 mensagem)" `939 
+V L "numero_envio" 8 50 "int8[35]" `1054 
+F G "Read_SMS" 8 62 "int8()" `942 
+V L "numero" 8 73 "*int8" `1070 
+F G "Get_Locate" 8 73 "int8(*int8 numero)" `943 
+F G "Get_Coordenadas" 8 94 "void()" `945 
+V L "index" 8 96 "int8" `1090 
+V L "index2" 8 97 "int8" `1091 
 C L "Get_Coordenadas" 8 21 1 "FUNCTION"
 C L "Get_Coordenadas" 8 21 1 "FUNCTION"
 C L "Get_Coordenadas" 8 21 1 "FUNCTION"
-V G "comando_disponivel_UART" 0 31 "int1" `978 
-V G "One_Second" 0 32 "int1" `1075 
-V G "One_Minute" 0 33 "int1" `1076 
-V G "Miliseconds" 0 34 "int16" `1077 
-V G "seconds" 0 35 "int16" `1078 
-V G "comando" 0 36 "int8" `1079 
-V G "resposta_SIM" 0 37 "int1" `1030 
-V G "leitura_tensao_partida" 0 38 "int8[400]" `1080 
-V G "partida_iniciada" 0 39 "int1" `1081 
-V G "aquisicao_tensao_partida" 0 40 "int1" `1082 
-V G "veiculo_ligado" 0 41 "int1" `1083 
-V G "index" 0 42 "int16" `1084 
-V G "index_1" 0 43 "int8" `1085 
-V G "index_2" 0 44 "int8" `1086 
-V G "V1" 0 45 "int8" `1087 
-V G "V2" 0 46 "int8" `1088 
-V G "sel_ad" 0 47 "int1" `1089 
-V G "leitura_corrente" 0 48 "int16[100]" `1090 
-V G "offset_current_ref" 0 49 "int16[100]" `1091 
-V G "leitura_tensao" 0 50 "int8[100]" `1092 
-V G "aux_leitura" 0 51 "int16[100]" `1093 
-V G "aux_offset_current_ref" 0 52 "float" `1094 
-V G "aux_corrente" 0 53 "float" `981 
-V G "aux_tensao" 0 54 "float" `982 
-V G "zero_set" 0 55 "float" `983 
-V G "zero_set_aux" 0 56 "float" `984 
-V G "corrente_limite" 0 57 "int32" `979 
-V G "qtd_numeros" 0 58 "int8" `964 
-V G "tempo_corrente_verif" 0 59 "int8" `1095 
-V G "index_envio" 0 60 "int8" `1096 
-V G "tempo_entre_alertas" 0 61 "int32" `980 
-V G "tempo_ultimo_alerta" 0 62 "int32" `1097 
-V G "numero" 0 63 "int8[20]" `1098  "Fim declaração de variáveis"
-F G "Timer_0" 0 67 "void()" `1099 
-F G "Interrupcao_Externa" 0 125 "void()" `1100 
-F G "MAIN" 0 139 "void()" `1101 
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-C L "MAIN" 0 29 1 "FUNCTION"
-F G "Executar_Cada_Segundo" 0 184 "void()" `928 
-F G "Executar_Cada_Minuto" 0 219 "void()" `929 
-F G "Obtem_SOH" 0 247 "void()" `934 
-F G "Calcula_SOC" 0 264 "void()" `933 
-V L "i" 0 266 "int8" `1117 
-V L "exibe" 0 267 "int8[50]" `1118 
-V L "num" 0 293 "*int16" `931 
-V L "tam" 0 293 "int8" `1123 
-F G "obtem_mediana" 0 293 "int16(*int16 num,int8 tam)" `930 
-V L "aux" 0 295 "int16" `1121 
-V L "i" 0 296 "int16" `1122 
-V L "j" 0 296 "int16" `1123 
+V G "comando_disponivel_UART" 0 33 "int1" `989 
+V G "One_Second" 0 34 "int1" `1092 
+V G "One_Minute" 0 35 "int1" `1093 
+V G "Miliseconds" 0 36 "int16" `1094 
+V G "seconds" 0 37 "int16" `1095 
+V G "comando" 0 38 "int8" `1096 
+V G "resposta_SIM" 0 39 "int1" `1047 
+V G "leitura_tensao_partida" 0 40 "int8[400]" `1097 
+V G "partida_iniciada" 0 41 "int1" `1098 
+V G "aquisicao_tensao_partida" 0 42 "int1" `1099 
+V G "veiculo_ligado" 0 43 "int1" `1100 
+V G "index" 0 44 "int16" `1101 
+V G "index_1" 0 45 "int8" `1102 
+V G "index_2" 0 46 "int8" `1103 
+V G "V1" 0 47 "int8" `1104 
+V G "V2" 0 48 "int8" `1105 
+V G "sel_ad" 0 49 "int1" `1106 
+V G "leitura_corrente" 0 50 "int16[100]" `1107 
+V G "offset_current_ref" 0 51 "int16[100]" `1108 
+V G "leitura_tensao" 0 52 "int8[100]" `1109 
+V G "aux_leitura" 0 53 "int16[100]" `1110 
+V G "aux_offset_current_ref" 0 54 "float" `1111 
+V G "aux_corrente" 0 55 "float" `992 
+V G "aux_tensao" 0 56 "float" `993 
+V G "zero_set" 0 57 "float" `994 
+V G "zero_set_aux" 0 58 "float" `995 
+V G "corrente_limite" 0 59 "int32" `990 
+V G "qtd_numeros" 0 60 "int8" `965 
+V G "tempo_corrente_verif" 0 61 "int8" `1112 
+V G "tempo_corrente_verif_low" 0 62 "int8" `1113 
+V G "index_envio" 0 63 "int8" `1114 
+V G "tempo_entre_alertas" 0 64 "int32" `991 
+V G "tempo_ultimo_alerta" 0 65 "int32" `1115 
+V G "detect_high_current" 0 66 "int1" `1116 
+V G "numero" 0 67 "int8[20]" `1117  "Fim declaração de variáveis"
+F G "Timer_0" 0 71 "void()" `1118 
+F G "Interrupcao_Externa" 0 130 "void()" `1119 
+F G "MAIN" 0 144 "void()" `1120 
+C L "MAIN" 0 31 1 "FUNCTION"
+C L "MAIN" 0 31 1 "FUNCTION"
+C L "MAIN" 0 31 1 "FUNCTION"
+F G "le_EEPROM" 0 192 "void()" `935 
+F G "Executar_Cada_Segundo" 0 203 "void()" `928 
+F G "Executar_Cada_Minuto" 0 261 "void()" `929 
+F G "Obtem_SOH" 0 292 "void()" `934 
+F G "Calcula_SOC" 0 309 "void()" `933 
+V L "i" 0 311 "int8" `1149 
+V L "exibe" 0 312 "int8[50]" `1150 
+V L "num" 0 338 "*int16" `931 
+V L "tam" 0 338 "int8" `1154 
+F G "obtem_mediana" 0 338 "int16(*int16 num,int8 tam)" `930 
+V L "aux" 0 340 "int16" `1152 
+V L "i" 0 341 "int16" `1153 
+V L "j" 0 341 "int16" `1154 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

@@ -1,6 +1,7 @@
 #include"SIM800L.h"
 #include"TAI_Bateria.h"
 #include"numeros.h"
+#include "Memory.h"
 
 #define   UART_BUFFER_SIZE         150
 
@@ -85,6 +86,8 @@ void Executa_Comando(char comando){
         
         get_numero(14,75,numero);
         insere_numero(numero);
+        write_config(ADDR_qtd_numeros,&qtd_numeros,1);
+        write_config(ADDR_vector_numeros,&numeros,50);
         get_numero(14,25,numero);
         Send_SMS(numero,numeros);
         break;
@@ -94,6 +97,8 @@ void Executa_Comando(char comando){
       if(posicao_valor_comando!= 0){
          
         limpa_numeros(); 
+        write_config(ADDR_qtd_numeros,&qtd_numeros,1);
+        write_config(ADDR_vector_numeros,&numeros,50);
         get_numero(14,25,numero);
         Send_SMS(numero,"OK CLEAR ALL");
         break;
@@ -113,6 +118,7 @@ void Executa_Comando(char comando){
          
         get_numero(14,25,numero);
         corrente_limite = get_value(posicao_valor_comando,6,7); //+CURALM001<CR><LF>
+        write_config(ADDR_corrente_limite,&corrente_limite,4);
         memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF));
         sprintf(comando_recibido_BUFF, "Corrente Limite = %Lu mA",corrente_limite);
         Send_SMS(numero,comando_recibido_BUFF);
@@ -124,6 +130,7 @@ void Executa_Comando(char comando){
          
         get_numero(14,25,numero);
         tempo_entre_alertas = get_value(posicao_valor_comando,3,7); //+CURLIM000001<CR><LF>
+        write_config(ADDR_tempo_entre_alertas,&tempo_entre_alertas,4);
         memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF));
         sprintf(comando_recibido_BUFF, "Tempo Entre Alertas = %Lu min",tempo_entre_alertas);
         Send_SMS(numero,comando_recibido_BUFF);
@@ -135,10 +142,10 @@ void Executa_Comando(char comando){
          
         get_numero(14,25,numero);
         memset (comando_recibido_BUFF, 0x00, sizeof(comando_recibido_BUFF));
-        sprintf(comando_recibido_BUFF, "Tempo Entre Alertas = %Lu min / Corrente Limite = %Lu mA / Corrente Atual: %6.0f mA / Tensao Atual: %2.2f V",tempo_entre_alertas,corrente_limite,aux_corrente,aux_tensao);
+        sprintf(comando_recibido_BUFF, "Tempo Entre Alertas = %Lu min / Corrente Limite = %Lu mA / Corrente Atual: %6.0f mA / Tensao Atual: %2.2f V / Qtd Telefones: %u",tempo_entre_alertas,corrente_limite,aux_corrente,aux_tensao,qtd_numeros);
         Send_SMS(numero,comando_recibido_BUFF);
-        if(qtd_numeros>0) Send_SMS(numero,numeros);
-
+        if(qtd_numeros>0) Send_SMS(numero,numeros);     
+           
         break;
       }
 
@@ -146,9 +153,9 @@ void Executa_Comando(char comando){
       if(posicao_valor_comando!= 0){
          
         get_numero(14,25,numero);
-        zero_set = zero_set_aux;
+        zero_set = zero_set_aux; 
+        write_config(ADDR_zero_set,&zero_set,4);
         Send_SMS(numero,"ZERO SETED");
-        if(qtd_numeros>0) Send_SMS(numero,numeros);
 
         break;
       }
