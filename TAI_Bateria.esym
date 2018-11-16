@@ -1,7 +1,7 @@
 D G "__PCH__" 0 0 ""5.015""
 D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""15-nov-18""
-D G "__TIME__" 0 0 ""19:50:27"" "Projeto Monitor do Estado de Baterias - TAI"
+D G "__DATE__" 0 0 ""16-nov-18""
+D G "__TIME__" 0 0 ""14:54:44"" "Projeto Monitor do Estado de Baterias - TAI"
 C G "" 0 5 6 "*"
 c L "set_tris_a" 1 1 6 "FUNCTION"
 v L "value" 1 45 "int8" `54 
@@ -1514,17 +1514,17 @@ C L "MAIN" 0 31 1 "FUNCTION"
 C L "MAIN" 0 31 1 "FUNCTION"
 F G "le_EEPROM" 0 192 "void()" `935 
 F G "Executar_Cada_Segundo" 0 203 "void()" `928 
-F G "Executar_Cada_Minuto" 0 261 "void()" `929 
-F G "Obtem_SOH" 0 292 "void()" `934 
-F G "Calcula_SOC" 0 309 "void()" `933 
-V L "i" 0 311 "int8" `1149 
-V L "exibe" 0 312 "int8[50]" `1150 
-V L "num" 0 338 "*int16" `931 
-V L "tam" 0 338 "int8" `1154 
-F G "obtem_mediana" 0 338 "int16(*int16 num,int8 tam)" `930 
-V L "aux" 0 340 "int16" `1152 
-V L "i" 0 341 "int16" `1153 
-V L "j" 0 341 "int16" `1154 
+F G "Executar_Cada_Minuto" 0 262 "void()" `929 
+F G "Obtem_SOH" 0 290 "void()" `934 
+F G "Calcula_SOC" 0 307 "void()" `933 
+V L "i" 0 309 "int8" `1146 
+V L "exibe" 0 310 "int8[50]" `1147 
+V L "num" 0 336 "*int16" `931 
+V L "tam" 0 336 "int8" `1151 
+F G "obtem_mediana" 0 336 "int16(*int16 num,int8 tam)" `930 
+V L "aux" 0 338 "int16" `1149 
+V L "i" 0 339 "int16" `1150 
+V L "j" 0 339 "int16" `1151 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

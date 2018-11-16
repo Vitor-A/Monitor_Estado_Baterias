@@ -203,30 +203,31 @@ void le_EEPROM(void){
 void Executar_Cada_Segundo(){
   
   Calcula_SOC();
-  if(aux_corrente > corrente_limite){
-    tempo_corrente_verif++;
-    if(tempo_corrente_verif > 30){
-      tempo_corrente_verif = 0;
-      tempo_corrente_verif_low = 0;
-      detect_high_current = true;
-      disable_interrupts(GLOBAL);
-      fprintf(MONITOR_SERIAL,"Detect High Current\r\n");
-      enable_interrupts(GLOBAL);
+  if(corrente_limite != 0){
+    if(aux_corrente > corrente_limite){
+      tempo_corrente_verif++;
+      if(tempo_corrente_verif > 30){
+        tempo_corrente_verif = 0;
+        tempo_corrente_verif_low = 0;
+        detect_high_current = true;
+        disable_interrupts(GLOBAL);
+        fprintf(MONITOR_SERIAL,"Detect High Current\r\n");
+        enable_interrupts(GLOBAL);
+      }
+    }
+    else{
+      tempo_corrente_verif_low++;
+      if(tempo_corrente_verif_low > 30){
+        tempo_corrente_verif_low = 0;
+        tempo_corrente_verif = 0;
+        detect_high_current = false;
+        disable_interrupts(GLOBAL);
+        fprintf(MONITOR_SERIAL,"Detect Low Current\r\n");
+        enable_interrupts(GLOBAL);
+      }
+      
     }
   }
-  else{
-    tempo_corrente_verif_low++;
-    if(tempo_corrente_verif_low > 30){
-      tempo_corrente_verif_low = 0;
-      tempo_corrente_verif = 0;
-      detect_high_current = false;
-      disable_interrupts(GLOBAL);
-      fprintf(MONITOR_SERIAL,"Detect Low Current\r\n");
-      enable_interrupts(GLOBAL);
-    }
-    
-  }
-
   if(aquisicao_tensao_partida){
 
     aquisicao_tensao_partida = FALSE;
@@ -265,9 +266,6 @@ void Executar_Cada_Minuto(){
     
     if((qtd_numeros>0 && qtd_numeros<4) && tempo_entre_alertas>0){
       tempo_ultimo_alerta++;
-      disable_interrupts(GLOBAL);
-      fprintf(MONITOR_SERIAL,"Tempo Entre Alertas %Lu , Tempo Ultimoi Alerta %Lu \r\n",tempo_entre_alertas,tempo_ultimo_alerta);
-      enable_interrupts(GLOBAL);
       disable_interrupts(INT_EXT); 
 
       if(tempo_ultimo_alerta >= tempo_entre_alertas){   
